@@ -24,7 +24,7 @@
         android:orientation="vertical"
         />
 
-    <!--    수직 가이드라인-->
+    <!--    수평 가이드라인-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hg1"
         android:layout_width="wrap_content"
@@ -41,10 +41,149 @@
         android:orientation="horizontal"
         />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘 하루는 어땠나요?"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@+id/hg1"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="감정우표를 선택해주세요"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택한 우표를 기반으로 맞춤형 질문이 배달됩니다"
+        android:textSize="10sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layout_marginTop ="@dimen/large_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
+<!--    첫번째 이미지-->
+    <ImageView
+        android:id="@+id/idleImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/idle"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginTop ="40dp"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+    <TextView
+        android:id="@+id/idleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="더없이 행복한 하루였어요"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/idleImage"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
+    <!--    두번째 이미지-->
+    <ImageView
+        android:id="@+id/happyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/happy"
+        app:layout_constraintTop_toBottomOf="@+id/idleText"
+        android:layout_marginTop ="@dimen/medium_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+    <TextView
+        android:id="@+id/happyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="들뜨고 흥분돼요"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/happyImage"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
+    <!--    세번째 이미지-->
+    <ImageView
+        android:id="@+id/sosoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/soso"
+        app:layout_constraintTop_toBottomOf="@+id/happyText"
+        android:layout_marginTop ="@dimen/medium_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+    <TextView
+        android:id="@+id/sosoText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="평범한 하루였어요"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/sosoImage"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+
+    <!--    네번째 이미지-->
+    <ImageView
+        android:id="@+id/sadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sad"
+        app:layout_constraintTop_toBottomOf="@+id/sosoText"
+        android:layout_marginTop ="@dimen/medium_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+    <TextView
+        android:id="@+id/sadText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="생각이 많아지고 불안해요"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/sadImage"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+
+    <!--    다섯번째 이미지-->
+    <ImageView
+        android:id="@+id/angryImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/angry"
+        app:layout_constraintTop_toBottomOf="@+id/sadText"
+        android:layout_marginTop ="@dimen/medium_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
+    <TextView
+        android:id="@+id/angryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="부글부글 화가 나요"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/angryImage"
+        android:layout_marginTop ="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/vg1"
+        app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
