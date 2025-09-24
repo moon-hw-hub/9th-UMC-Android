@@ -1,4 +1,4 @@
-package com.example.nike.ui.theme
+package com.example.yourapplication.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

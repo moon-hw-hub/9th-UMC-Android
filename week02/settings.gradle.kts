@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Nike"
+rootProject.name = "Your Application"
 include(":app")
  

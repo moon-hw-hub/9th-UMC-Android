@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.nike"
+    namespace = "com.example.yourapplication"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.nike"
+        applicationId = "com.example.yourapplication"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -40,10 +40,6 @@ android {
 }
 
 dependencies {
-    //Navigation Component 라이브러리를 프로젝트에 추가
-    val navVersion = "2.9.4"
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

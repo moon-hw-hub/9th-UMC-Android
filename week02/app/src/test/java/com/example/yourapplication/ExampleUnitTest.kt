@@ -1,4 +1,4 @@
-package com.example.nike
+package com.example.yourapplication
 
 import org.junit.Test
 
