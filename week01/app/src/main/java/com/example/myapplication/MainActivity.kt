@@ -74,4 +74,4 @@ class MainActivity : ComponentActivity() {
 
     }
 }
-//실험
+//뷰 바인딩
