@@ -187,5 +187,5 @@
         app:layout_constraintEnd_toEndOf="@id/vg2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--먄 위를 가장 종속성이 크게 잡는 방법 고려-->
+<!--맨 위를 가장 종속성이 크게 잡는 방법 고려-->
 <!--그래비티 속성-->
