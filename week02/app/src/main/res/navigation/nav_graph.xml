@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.yourapplication.HomeFragment"
+        android:label="홈"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/buyFragment"
+        android:name="com.example.yourapplication.BuyFragment"
+        android:label="구매하기"
+        tools:layout="@layout/fragment_buy" />
+
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.yourapplication.WishlistFragment"
+        android:label="위시리스트"
+        tools:layout="@layout/fragment_wishlist" />
+
+    <fragment
+        android:id="@+id/basketFragment"
+        android:name="com.example.yourapplication.BasketFragment"
+        android:label="장바구니"
+        tools:layout="@layout/fragment_basket" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.yourapplication.ProfileFragment"
+        android:label="프로필"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

@@ -13,35 +13,51 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.yourapplication.ui.theme.YourApplicationTheme
 import androidx.appcompat.app.AppCompatActivity // XML +
-import com.example.yourapplication.HomeFragment
+import com.example.yourapplication.databinding.ActivityMainBinding //뷰바인딩 사용을 위한 패키지 임포트
+import androidx.navigation.fragment.NavHostFragment // 내비게이션 패키지?
+import androidx.navigation.ui.setupWithNavController // 내비게이션 컨트롤러 패키지?
+
+
+
+private lateinit var binding: ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 //        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        //setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragment_container) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // BottomNavigationView를 NavController와 연결
+        binding.mainBnv.setupWithNavController(navController)
 
 
-        //프래그먼트들 추가
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, HomeFragment())
-            .commit()
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, BuyFragment())
-            .commit()
+        //초기 프래그먼트는 홈 화면으로
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, HomeFragment())
+//            .commit()
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, BuyFragment())
-            .commit()
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, BuyFragment())
-            .commit()
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, BuyFragment())
-            .commit()
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, BuyFragment())
+//            .commit()
+//
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, WishlistFragment())
+//            .commit()
+//
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, BasketFragment())
+//            .commit()
+//
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, ProfileFragment())
+//            .commit()
 
     }
 }

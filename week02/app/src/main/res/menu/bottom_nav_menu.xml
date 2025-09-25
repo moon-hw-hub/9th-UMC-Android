@@ -5,19 +5,19 @@
         android:icon="@drawable/housesimple"
         android:title="홈" />
     <item
-        android:id="@+id/diaryFragment"
+        android:id="@+id/buyFragment"
         android:icon="@drawable/listmagnifyingglass"
         android:title="구매하기" />
     <item
-        android:id="@+id/calendarFragment"
+        android:id="@+id/wishlistFragment"
         android:icon="@drawable/heartstraight"
         android:title="위시리스트" />
     <item
-        android:id="@+id/friendFragment"
+        android:id="@+id/basketFragment"
         android:icon="@drawable/bagsimple"
         android:title="장바구니" />
     <item
-        android:id="@+id/mypageFragment"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/user"
         android:title="프로필" />
 

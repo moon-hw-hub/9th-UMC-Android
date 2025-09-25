@@ -61,6 +61,10 @@ dependencies {
     implementation("androidx.fragment:fragment:1.8.9") // 프래그먼트 사용을 위함
     implementation("androidx.appcompat:appcompat:1.7.1") //appcompat 사용을 위함
     implementation("com.google.android.material:material:1.13.0") //메테리얼 컴포넌트 라이브러리
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:2.9.4")
+    implementation("androidx.navigation:navigation-ui-ktx:2.9.4")
+
 
 
 }
