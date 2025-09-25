@@ -7,6 +7,14 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/frglimit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.89"
+        android:orientation="horizontal"
+        />
+
 <!--    프래그먼트를 담을 그릇-->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_fragmentContainer"
@@ -15,6 +23,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="frglimit"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
