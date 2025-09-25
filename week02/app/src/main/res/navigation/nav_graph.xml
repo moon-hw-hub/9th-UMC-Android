@@ -2,8 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment"
-    android:id="@+id/nav_graph">
+    >
 
     <fragment
         android:id="@+id/homeFragment"
@@ -21,7 +22,13 @@
         android:id="@+id/wishlistFragment"
         android:name="com.example.yourapplication.WishlistFragment"
         android:label="위시리스트"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_wishlist">
+
+    <!-- 위시리스트 -> 구매하기로 이동하는 action 추가 -->
+        <action
+        android:id="@+id/action_wishlistFragment_to_buyFragment"
+        app:destination="@id/buyFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/basketFragment"

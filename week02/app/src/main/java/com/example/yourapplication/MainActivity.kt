@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.yourapplication.ui.theme.YourApplicationTheme
 import androidx.appcompat.app.AppCompatActivity // XML +
-import com.example.yourapplication.databinding.ActivityMainBinding //뷰바인딩 사용을 위한 패키지 임포트
+import com.example.yourapplication.databinding.ActivityMainBinding //뷰바인딩 클래스 사용을 위한 패키지 임포트
 import androidx.navigation.fragment.NavHostFragment // 내비게이션 패키지?
 import androidx.navigation.ui.setupWithNavController // 내비게이션 컨트롤러 패키지?
 
@@ -24,8 +24,9 @@ private lateinit var binding: ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // activity_main을 메모리에 올리고, 그 루트 뷰를 binding.root로 제공함
         binding = ActivityMainBinding.inflate(layoutInflater)
-//        enableEdgeToEdge()
+
         //setContentView(R.layout.activity_main)
         setContentView(binding.root)
 
@@ -35,8 +36,6 @@ class MainActivity : AppCompatActivity() {
 
         // BottomNavigationView를 NavController와 연결
         binding.mainBnv.setupWithNavController(navController)
-
-
 
         //초기 프래그먼트는 홈 화면으로
 //        supportFragmentManager.beginTransaction()
