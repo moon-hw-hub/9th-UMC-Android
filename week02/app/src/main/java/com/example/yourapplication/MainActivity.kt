@@ -12,36 +12,37 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.yourapplication.ui.theme.YourApplicationTheme
+import androidx.appcompat.app.AppCompatActivity // XML +
+import com.example.yourapplication.HomeFragment
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            YourApplicationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
-        }
+//        enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
+
+
+        //프래그먼트들 추가
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, HomeFragment())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, BuyFragment())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, BuyFragment())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, BuyFragment())
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, BuyFragment())
+            .commit()
+
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    YourApplicationTheme {
-        Greeting("Android")
-    }
-}

@@ -58,5 +58,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("androidx.fragment:fragment:1.8.9")
+    implementation("androidx.fragment:fragment:1.8.9") // 프래그먼트 사용을 위함
+    implementation("androidx.appcompat:appcompat:1.7.1") //appcompat 사용을 위함
+    implementation("com.google.android.material:material:1.13.0") //메테리얼 컴포넌트 라이브러리
+
+
 }
