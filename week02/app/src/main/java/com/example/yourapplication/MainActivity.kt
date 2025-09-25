@@ -37,6 +37,12 @@ class MainActivity : AppCompatActivity() {
         // BottomNavigationView를 NavController와 연결
         binding.mainBnv.setupWithNavController(navController)
 
+        val target = intent.getStringExtra("targetFragment")
+        if (target == "profile") {
+            navController.navigate(R.id.profileFragment)
+        }
+
+
         //초기 프래그먼트는 홈 화면으로
 //        supportFragmentManager.beginTransaction()
 //            .replace(R.id.fragment_container, HomeFragment())
