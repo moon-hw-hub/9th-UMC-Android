@@ -25,6 +25,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.miniPlayerLayout.setOnClickListener {
+            finish() //현재 액티비티 종료
+            val intent = Intent(this, SongActivity::class.java)
+            startActivity(intent)
+
+        }
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment())
             .commit()
