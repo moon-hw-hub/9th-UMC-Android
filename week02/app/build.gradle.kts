@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.yourapplication"
+    namespace = "com.example.flo"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.yourapplication"
+        applicationId = "com.example.flo"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -58,15 +58,8 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("androidx.fragment:fragment:1.8.9") // 프래그먼트 사용을 위함
-    implementation("androidx.appcompat:appcompat:1.7.1") //appcompat 사용을 위함
-    implementation("com.google.android.material:material:1.13.0") //메테리얼 컴포넌트 라이브러리
-    // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.9.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.9.4")
-
-
-
-
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("androidx.fragment:fragment:1.8.9")
+    implementation("com.google.android.material:material:1.13.0")
 
 }

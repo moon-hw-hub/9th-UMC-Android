@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Your Application"
+rootProject.name = "FLO"
 include(":app")
  

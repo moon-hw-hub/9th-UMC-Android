@@ -2,23 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/housesimple"
-        android:title="홈" />
+        android:icon="@drawable/ic_bottom_home_no_select"
+        android:title="홈"/>
     <item
-        android:id="@+id/buyFragment"
-        android:icon="@drawable/listmagnifyingglass"
-        android:title="구매하기" />
+        android:id="@+id/lookFragment"
+        android:icon="@drawable/ic_bottom_look_no_select"
+        android:title="둘러보기" />
     <item
-        android:id="@+id/wishlistFragment"
-        android:icon="@drawable/heartstraight"
-        android:title="위시리스트" />
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_bottom_search_no_select"
+        android:title="검색" />
     <item
-        android:id="@+id/basketFragment"
-        android:icon="@drawable/bagsimple"
-        android:title="장바구니" />
-    <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/user"
-        android:title="프로필" />
-
+        android:id="@+id/lockerFragment"
+        android:icon="@drawable/ic_bottom_locker_no_select"
+        android:title="보관함" />
 </menu>
