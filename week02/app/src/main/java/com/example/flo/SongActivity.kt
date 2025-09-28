@@ -15,10 +15,21 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (intent.hasExtra("title") && intent.hasExtra("singer")) {
+            binding.songMusicTitleTv.text = intent.getStringExtra("title")
+            binding.songSingerNameTv.text = intent.getStringExtra("singer")
+        }
+
+        val bundle = Bundle()
+        bundle.putString("albumname", binding.songMusicTitleTv.text.toString())
+
+
         binding.songDownIb.setOnClickListener {
-            finish()
+            //finish()
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtras(bundle)
             startActivity(intent)
+            finish()
 
         }
 

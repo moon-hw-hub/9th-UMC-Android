@@ -17,8 +17,18 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         binding.homeAlbumImgIv1.setOnClickListener {
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.homeFragment,AlbumFragment()).commitAllowingStateLoss()
+            val bundle = Bundle()
+            bundle.putString("album", binding.lilac.text.toString())
+            bundle.putString("singer", binding.iu.text.toString())
+
+            val albumFragment = AlbumFragment()
+            albumFragment.arguments = bundle
+
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, albumFragment)
+                .commitAllowingStateLoss()
 
 
         }

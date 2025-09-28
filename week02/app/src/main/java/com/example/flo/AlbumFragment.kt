@@ -17,7 +17,22 @@ class AlbumFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAlbumBinding.inflate(inflater, container, false)
+        val albumName = arguments?.getString("album")
+        val singerName = arguments?.getString("singer")
+        binding.albumMusicTitleTv.text = albumName
+        binding.albumSingerNameTv.text = singerName
+
+        binding.albumBackIv.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, HomeFragment())
+                .commitAllowingStateLoss()
+        }
+
         return binding.root
+
+
     }
+
+
 
 }

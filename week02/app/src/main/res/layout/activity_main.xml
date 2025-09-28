@@ -2,108 +2,111 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
 
-    <!--    프래그먼트를 담을 그릇-->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container"
+    <FrameLayout
+        android:id="@+id/main_frm"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/main_bnv"
-        tools:layout="@layout/fragment_home"/>
+        app:layout_constraintBottom_toTopOf="@id/main_player_cl"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 미니 플레이어 (하단 고정) -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/miniPlayerLayout"
+        android:id="@+id/main_player_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/fragment_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="#F9F9F9"
+        android:paddingVertical="5dp"
+        app:layout_constraintBottom_toTopOf="@id/main_bnv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/playing_song"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pop song"
-            android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/playing_song_singer"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:layout_marginStart="20dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/playing_song_singer"
+            <TextView
+                android:id="@+id/main_miniplayer_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="라일락"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/main_miniplayer_singer_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이유 (IU)"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kenshi Yonezu"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/playing_song"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_miniplayer_previous" />
+
+            <ImageView
+                android:id="@+id/main_miniplayer_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_miniplayer_play" />
+
+            <ImageView
+                android:id="@+id/main_pause_btn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_miniplay_pause"
+                android:visibility="gone" />
 
 
-        <!-- 노래 플레이 세트-->
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/btn_miniplayer_previous"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/main_miniplayer_btn"
-            android:layout_marginEnd="40dp"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/btn_miniplayer_next" />
 
-        <ImageView
-            android:id="@+id/main_miniplayer_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/btn_miniplayer_play"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/miniplayer_go_next_btn"
-            android:layout_marginEnd="40dp"/>
 
-        <ImageView
-            android:id="@+id/miniplayer_go_next_btn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/btn_miniplayer_next"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/miniplayer_go_list_btn"
-            android:layout_marginEnd="30dp"/>
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="15dp"
+                android:src="@drawable/btn_miniplayer_go_list" />
 
-        <ImageView
-            android:id="@+id/miniplayer_go_list_btn"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/btn_miniplayer_go_list"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bnv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        app:itemIconSize="20dp"
         app:itemIconTint="@drawable/btn_color_selector"
         app:itemTextColor="@drawable/btn_color_selector"
-        app:itemIconSize="20dp"
         app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav_menu"/>
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
