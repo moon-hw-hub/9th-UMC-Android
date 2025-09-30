@@ -13,6 +13,11 @@ class SongActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivitySongBinding.inflate(layoutInflater)
+
+        //버튼 교체 미션
+        
+
+
         setContentView(binding.root)
 
         if (intent.hasExtra("title") && intent.hasExtra("singer")) {
@@ -22,7 +27,6 @@ class SongActivity : AppCompatActivity() {
 
         val bundle = Bundle()
         bundle.putString("albumname", binding.songMusicTitleTv.text.toString())
-
 
         binding.songDownIb.setOnClickListener {
             //finish()
