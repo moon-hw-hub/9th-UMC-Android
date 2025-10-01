@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+<!--    다른 레이아웃도 써보자!!-->
 
     <LinearLayout
         android:id="@+id/locker_and_login"
