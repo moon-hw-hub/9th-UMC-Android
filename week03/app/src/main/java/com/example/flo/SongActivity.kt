@@ -58,7 +58,6 @@ class SongActivity : AppCompatActivity() {
             }
         }
 
-
         setContentView(binding.root)
 
         if (intent.hasExtra("title") && intent.hasExtra("singer")) {
