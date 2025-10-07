@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentSongBinding
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+
 
 
 class SongFragment : Fragment() {
     lateinit var binding : FragmentSongBinding
-    private var songDatas = ArrayList<TrackSong>()
+//    private var songDatas = ArrayList<Song>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,18 +23,13 @@ class SongFragment : Fragment() {
     ): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
 
-        // 데이터 리스트 생성 더미 데이터
-        songDatas.apply {
-            add(TrackSong(title = "라일락", singer = "아이유 (IU)"))
+        //수록곡 목록 표시를 위해 앨범 정보 번들을 겟또다제
+        val albumJson = arguments?.getString("album")
+        val album = Gson().fromJson(albumJson, Album::class.java)
 
-        }
-
-        var songRVAdapter = SongRVAdapter(songDatas)
+        val songRVAdapter = SongRVAdapter(album.songs ?: arrayListOf())
         binding.albumTrackRv.adapter = songRVAdapter
-
-        binding.albumTrackRv.layoutManager = LinearLayoutManager(context,
-            LinearLayoutManager.VERTICAL, false)
-
+        binding.albumTrackRv.layoutManager = LinearLayoutManager(context)
 
         //내 취향 믹스 미션
         var isON = false

@@ -8,7 +8,7 @@ import com.example.flo.databinding.ItemAlbumBinding
 import com.example.flo.databinding.ItemSongBinding
 
 
-class SongRVAdapter(private var trackList: ArrayList<TrackSong>): RecyclerView.Adapter<SongRVAdapter.ViewHolder>(){
+class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter<SongRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
@@ -24,17 +24,16 @@ class SongRVAdapter(private var trackList: ArrayList<TrackSong>): RecyclerView.A
         holder: ViewHolder,
         position: Int
     ) {
-        holder.bind(trackList[position])
+        holder.bind(songList[position])
 
     }
 
-    override fun getItemCount():Int = trackList.size
-
+    override fun getItemCount():Int = songList.size
 
     inner class ViewHolder(var binding: ItemSongBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(trackSong: TrackSong) {
-            binding.songMusicTitleTv.text = trackSong.title
-            binding.songSingerNameTv.text = trackSong.singer
+        fun bind(song: Song) {
+            binding.songMusicTitleTv.text = song.title
+            binding.songSingerNameTv.text = song.singer
         }
 
     }

@@ -38,10 +38,25 @@ class HomeFragment : Fragment() {
 //        }
         // 데이터 리스트 생성 더미 데이터
         albumDatas.apply {
-            add(Album(title = "Butter", singer = "문현우 (Mky)", R.drawable.img_album_exp))
-            add(Album(title = "Lilac", singer = "아이유 (IU)", R.drawable.img_album_exp2))
-            add(Album(title = "Temp", singer = "김시선 (UMC)", R.drawable.img_potcast_exp))
-            add(Album(title = "Classic", singer = "베토벤 (Beethoven)", R.drawable.img_first_album_default))
+            add(
+                Album(
+                    title = "Butter",
+                    singer = "방탄소년단 (BTS)",
+                    coverImage = R.drawable.img_album_exp,
+                    ))
+            add(
+                Album(
+                    title = "Lilac",
+                    singer = "아이유 (IU)",
+                    coverImage = R.drawable.img_album_exp2,
+                    songs = arrayListOf(
+                        Song("라일락", "아이유 (IU)"),
+                        Song("Flu", "아이유 (IU)")
+                    )
+                )
+            )
+            add(Album(title = "Temp", singer = "김시선 (UMC)", coverImage = R.drawable.img_potcast_exp))
+            add(Album(title = "Classic", singer = "베토벤 (Beethoven)", coverImage = R.drawable.img_first_album_default))
         }
 
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
@@ -83,7 +98,6 @@ class HomeFragment : Fragment() {
                     val gson = Gson()
                     val albumJson = gson.toJson(album) //앨범객체를 Json으로 변환
                     putString("album", albumJson)
-
                 }
             })
             .commitAllowingStateLoss()

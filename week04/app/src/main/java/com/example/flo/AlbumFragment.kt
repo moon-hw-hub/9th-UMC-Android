@@ -27,12 +27,6 @@ class AlbumFragment : Fragment() {
         val album = gson.fromJson(albumJson, Album::class.java)
         setInit(album)
 
-        //홈프래그먼트에서 번들로 전달한 값을 받음
-//        val albumName = arguments?.getString("album")
-//        val singerName = arguments?.getString("singer")
-//        binding.albumMusicTitleTv.text = albumName
-//        binding.albumSingerNameTv.text = singerName
-
         //홈프래그먼트로의 화면전환
         binding.albumBackIv.setOnClickListener {
             (context as MainActivity).supportFragmentManager.beginTransaction()
@@ -49,7 +43,8 @@ class AlbumFragment : Fragment() {
         }
         detailFragment.arguments = bundle
 
-        val albumAdapter = AlbumVPAdapter(this)
+        //어댑터 생성시 인자 하나 더 추가 -> 송프래그먼트에 수록곡 정보를 넘겨주기위함
+        val albumAdapter = AlbumVPAdapter(this, album)
         binding.albumContentVp.adapter = albumAdapter
         TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) {
             tap, position ->
