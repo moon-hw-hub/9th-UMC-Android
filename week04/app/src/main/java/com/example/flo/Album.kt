@@ -6,5 +6,9 @@ data class Album(
     var coverImage: Int? = null,
     // 수록곡 정보용 arraylist
     var songs: ArrayList<Song>? = null
+)
 
+data class TrackSong(
+    var title: String? = "",
+    var singer: String? = ""
 )
