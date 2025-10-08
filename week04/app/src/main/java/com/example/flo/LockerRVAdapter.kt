@@ -34,7 +34,7 @@ class LockerRVAdapter(private var songs: ArrayList<Song>) : RecyclerView.Adapter
 
     inner class ViewHolder(var binding: ItemSavedsongBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
-            binding.songListAlbumImgIv.setImageResource(song.img)
+            //binding.songListAlbumImgIv.setImageResource(song.img)
             binding.songMusicTitleTv.text = song.title
             binding.songSingerNameTv.text = song.singer
         }

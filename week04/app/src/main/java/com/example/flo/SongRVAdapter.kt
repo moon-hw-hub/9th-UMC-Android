@@ -14,7 +14,7 @@ class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter
         viewGroup: ViewGroup,
         viewType: Int
     ): SongRVAdapter.ViewHolder {
-        var binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
+        var binding: ItemSongBinding = ItemSongBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )
 
@@ -31,10 +31,10 @@ class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter
 
     override fun getItemCount():Int = songList.size
 
-    inner class ViewHolder(var binding: ItemSavedsongBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(var binding: ItemSongBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
-            //binding.songListOrderTv.text = song.num
-            binding.songListAlbumImgIv.setImageResource(song.img)
+            binding.songListOrderTv.text = song.num
+            //binding.songListAlbumImgIv.setImageResource(song.img)
             binding.songMusicTitleTv.text = song.title
             binding.songSingerNameTv.text = song.singer
         }

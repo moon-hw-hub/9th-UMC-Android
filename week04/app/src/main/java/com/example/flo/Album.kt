@@ -8,7 +8,3 @@ data class Album(
     var songs: ArrayList<Song>? = arrayListOf()
 )
 
-//data class TrackSong(
-//    var title: String? = "",
-//    var singer: String? = ""
-//)

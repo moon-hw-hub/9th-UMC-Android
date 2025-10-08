@@ -21,13 +21,13 @@ class SavedsongFragment : Fragment() {
         binding = FragmentSavedsongBinding.inflate(inflater, container, false)
         Log.d("FragmentCheck", "SavedsongFragment onCreateView")
 
-        // 1. 곡 리스트 생성
-        val songList = arrayListOf(
-            Song(num = null, img = R.drawable.img_album_exp, title = "Butter", singer = "방탄소년단 (BTS)")
+         //1. 곡 리스트 생성
+        val savedsongList = arrayListOf(
+            SavedSong(img = R.drawable.img_album_exp, title = "Butter", singer = "방탄소년단 (BTS)")
         )
 
-        val songRVAdapter = SongRVAdapter(songList)
-        binding.savedSongRv.adapter = songRVAdapter
+        val savedsongRVAdapter = SavedsongRVAdapter(savedsongList)
+        binding.savedSongRv.adapter = savedsongRVAdapter
 
         return binding.root
 
