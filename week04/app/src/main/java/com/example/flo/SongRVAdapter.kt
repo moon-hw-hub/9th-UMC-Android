@@ -32,6 +32,7 @@ class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter
 
     inner class ViewHolder(var binding: ItemSongBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
+            binding.songListOrderTv.text = song.num
             binding.songMusicTitleTv.text = song.title
             binding.songSingerNameTv.text = song.singer
         }

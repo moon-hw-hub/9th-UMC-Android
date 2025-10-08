@@ -43,6 +43,12 @@ class HomeFragment : Fragment() {
                     title = "Butter",
                     singer = "방탄소년단 (BTS)",
                     coverImage = R.drawable.img_album_exp,
+                    songs = arrayListOf(
+                        Song("01", "Butter", "방탄소년단 (BTS)"),
+                        Song("02", "Permission to Dance","방탄소년단 (BTS)"),
+                        Song("03", "Butter (Instrumental)","방탄소년단 (BTS)"),
+                        Song("04", "Permission to Dance (Instrumental)", "방탄소년단 (BTS)")
+                    )
                     ))
             add(
                 Album(
@@ -50,13 +56,40 @@ class HomeFragment : Fragment() {
                     singer = "아이유 (IU)",
                     coverImage = R.drawable.img_album_exp2,
                     songs = arrayListOf(
-                        Song("라일락", "아이유 (IU)"),
-                        Song("Flu", "아이유 (IU)")
+                        Song("01","라일락", "아이유 (IU)"),
+                        Song("02" , "Flu", "아이유 (IU)"),
+                        Song("03","Coin", "아이유 (IU)"),
+                        Song("04", "봄 안녕 봄","아이유 (IU)"),
+                        Song("05", "Celebrity", "아이유 (IU)"),
+                        Song("06", "돌림노래", "아이유 (IU)"),
+                        Song("07", "빈 컵","아이유 (IU)"),
+                        Song("08", "아이와 나의 바다","아이유 (IU)"),
+                        Song("09", "어푸 (Ah puh )", "아이유 (IU)"),
+                        Song("10", "에필로그", "아이유 (IU)")
                     )
                 )
             )
-            add(Album(title = "Temp", singer = "김시선 (UMC)", coverImage = R.drawable.img_potcast_exp))
-            add(Album(title = "Classic", singer = "베토벤 (Beethoven)", coverImage = R.drawable.img_first_album_default))
+            add(
+                Album(
+                    title = "Temp",
+                    singer = "김시선 (UMC)",
+                    coverImage = R.drawable.img_potcast_exp))
+            add(
+                Album(
+                    title = "Classic",
+                    singer = "베토벤 (Beethoven)",
+                    coverImage = R.drawable.img_first_album_default,
+                    songs = arrayListOf(
+                        Song("01", "월광 소나타", "베토벤 (Beethoven)"),
+                        Song("02", "비창 소나타", "베토벤 (Beethoven)"),
+                        Song("03", "운명 교향곡", "베토벤 (Beethoven)"),
+                        Song("04", "영웅 교향곡", "베토벤 (Beethoven)"),
+                        Song("05", "환희의 송가", "베토벤 (Beethoven)"),
+                        Song("06", "황제 협주곡", "베토벤 (Beethoven)")
+
+                    )
+                )
+            )
         }
 
         val albumRVAdapter = AlbumRVAdapter(albumDatas)

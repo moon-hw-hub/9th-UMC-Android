@@ -23,7 +23,7 @@ class SongFragment : Fragment() {
     ): View? {
         binding = FragmentSongBinding.inflate(inflater, container, false)
 
-        //수록곡 목록 표시를 위해 앨범 정보 번들을 겟또다제
+        //수록곡 목록 표시를 위해 앨범 정보를 겟또
         val albumJson = arguments?.getString("album")
         val album = Gson().fromJson(albumJson, Album::class.java)
 
