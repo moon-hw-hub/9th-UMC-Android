@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.util.Log
+import com.google.gson.Gson
+
 
 class SavedalbumFragment : Fragment() {
 
@@ -19,6 +21,9 @@ class SavedalbumFragment : Fragment() {
     ): View? {
         binding = FragmentSavedalbumBinding.inflate(inflater, container, false)
         Log.d("FragmentCheck", "SavedAlbumFragment onCreateView")
+
+        val songJson = arguments?.getString("song")
+        val song = Gson().fromJson(songJson, Song::class.java)
 
         return binding.root
     }

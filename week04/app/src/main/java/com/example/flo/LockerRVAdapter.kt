@@ -1,44 +1,43 @@
 package com.example.flo
 
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.View
 import androidx.viewbinding.ViewBinding
-import com.example.flo.databinding.ItemAlbumBinding
 import com.example.flo.databinding.ItemSavedsongBinding
-import com.example.flo.databinding.ItemSongBinding
 
-
-class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter<SongRVAdapter.ViewHolder>(){
+class LockerRVAdapter(private var songs: ArrayList<Song>) : RecyclerView.Adapter<LockerRVAdapter.ViewHolder>()
+ {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): SongRVAdapter.ViewHolder {
-        var binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
+    ): LockerRVAdapter.ViewHolder {
+        val binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )
 
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(
-        holder: ViewHolder,
-        position: Int
-    ) {
-        holder.bind(songList[position])
+     override fun onBindViewHolder(
+         holder: ViewHolder,
+         position: Int
+     ) {
+         holder.bind(songs[position])
+         holder.itemView.setOnClickListener {
 
-    }
+         }
+     }
 
-    override fun getItemCount():Int = songList.size
+    override fun getItemCount(): Int = songs.size
 
     inner class ViewHolder(var binding: ItemSavedsongBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
-            //binding.songListOrderTv.text = song.num
             binding.songListAlbumImgIv.setImageResource(song.img)
             binding.songMusicTitleTv.text = song.title
             binding.songSingerNameTv.text = song.singer
         }
-
     }
 
 }
