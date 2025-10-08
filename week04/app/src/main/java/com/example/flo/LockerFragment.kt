@@ -11,8 +11,7 @@ import com.google.gson.Gson
 
 class LockerFragment : Fragment() {
     lateinit var binding: FragmentLockerBinding
-    private var songDatas = ArrayList< SavedSong>()
-    private var gson: Gson = Gson()
+//    private var songDatas = ArrayList< SavedSong>()
 
     private val information = arrayListOf("저장한 곡", "음악피일", "저장앨범")
 
@@ -29,11 +28,6 @@ class LockerFragment : Fragment() {
 //                singer = "방탄소년단 (BTS)"))
 //            add(SavedSong(img = R.drawable.img_album_exp2, title = "라일락", singer = "아이유 (IU)"))
 //        }
-
-        //저장한 곡들 데이터
-        val songJson = arguments?.getString("song")
-        val song = gson.fromJson(songJson, Song::class.java)
-        //setInit()
 
         //뷰페이저 어댑터
         val lockerAdapter = LockerVPAdapter(this)
