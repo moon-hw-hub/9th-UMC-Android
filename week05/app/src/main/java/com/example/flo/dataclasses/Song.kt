@@ -1,5 +1,4 @@
-package com.example.flo
-import android.widget.ImageView
+package com.example.flo.dataclasses
 
 data class Song(
     val num : String? = "01",

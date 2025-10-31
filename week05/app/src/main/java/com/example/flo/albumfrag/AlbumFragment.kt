@@ -1,14 +1,19 @@
-package com.example.flo
+package com.example.flo.albumfrag
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.flo.albumfrag.AlbumVPAdapter
+import com.example.flo.R
+import com.example.flo.activities.MainActivity
 import com.example.flo.databinding.FragmentAlbumBinding
+import com.example.flo.dataclasses.Album
+import com.example.flo.albumfrag.DetailFragment
+import com.example.flo.home.HomeFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
-
 
 class AlbumFragment : Fragment() {
     lateinit var binding: FragmentAlbumBinding
@@ -46,8 +51,7 @@ class AlbumFragment : Fragment() {
         //어댑터 객체 생성시 앨범 인스턴스도 넘겨줌  -> 송프래그먼트에 수록곡 정보를 넘겨주기위함
         val albumAdapter = AlbumVPAdapter(this, album)
         binding.albumContentVp.adapter = albumAdapter
-        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) {
-            tap, position ->
+        TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) { tap, position ->
             tap.text = information[position]
 
         }.attach()

@@ -1,10 +1,10 @@
-package com.example.flo
+package com.example.flo.albumfrag
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.example.flo.databinding.ItemAlbumBinding
+import com.example.flo.dataclasses.Album
 
 class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
 
@@ -30,7 +30,7 @@ class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adap
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): AlbumRVAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ItemAlbumBinding = ItemAlbumBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )
@@ -40,7 +40,7 @@ class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adap
     }
 
     // 뷰홀더에 데이터를 바인딩해줄때마다 호출, 클릭 이벤트 작성
-    override fun onBindViewHolder(holder: AlbumRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(albumList[position])
         holder.itemView.setOnClickListener { myItemClickListener.onItemClick(albumList[position]) }
 //        holder.binding.itemAlbumTitleTv.setOnClickListener { myItemClickListener.onRemoveAlbum(position) }

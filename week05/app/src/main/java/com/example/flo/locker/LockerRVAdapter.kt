@@ -1,18 +1,17 @@
-package com.example.flo
+package com.example.flo.locker
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import androidx.viewbinding.ViewBinding
 import com.example.flo.databinding.ItemSavedsongBinding
+import com.example.flo.dataclasses.Song
 
 class LockerRVAdapter(private var songs: ArrayList<Song>) : RecyclerView.Adapter<LockerRVAdapter.ViewHolder>()
  {
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): LockerRVAdapter.ViewHolder {
+    ): ViewHolder {
         val binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )

@@ -1,19 +1,16 @@
-package com.example.flo
+package com.example.flo.albumfrag
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.viewbinding.ViewBinding
-import com.example.flo.databinding.ItemAlbumBinding
-import com.example.flo.databinding.ItemSavedsongBinding
+import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSongBinding
-
+import com.example.flo.dataclasses.Song
 
 class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter<SongRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): SongRVAdapter.ViewHolder {
+    ): ViewHolder {
         var binding: ItemSongBinding = ItemSongBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )

@@ -1,14 +1,14 @@
-package com.example.flo
+package com.example.flo.locker
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentSavedalbumBinding
+import com.example.flo.R
+import com.example.flo.locker.SavedsongRVAdapter
 import com.example.flo.databinding.FragmentSavedsongBinding
-import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.flo.dataclasses.SavedSong
 
 class SavedsongFragment : Fragment() {
 

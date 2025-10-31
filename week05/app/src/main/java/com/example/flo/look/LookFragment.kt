@@ -1,23 +1,21 @@
-package com.example.flo
+package com.example.flo.look
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.databinding.FragmentVideoBinding
+import com.example.flo.databinding.FragmentLookBinding
 
-
-class VideoFragment : Fragment() {
-    lateinit var binding : FragmentVideoBinding
+class LookFragment : Fragment() {
+    lateinit var binding: FragmentLookBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentVideoBinding.inflate(inflater, container, false)
-
+        binding = FragmentLookBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }

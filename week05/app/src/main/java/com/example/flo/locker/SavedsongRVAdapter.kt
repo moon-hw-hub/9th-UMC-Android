@@ -1,9 +1,10 @@
-package com.example.flo
+package com.example.flo.locker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSavedsongBinding
+import com.example.flo.dataclasses.SavedSong
 
 class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): RecyclerView.Adapter<SavedsongRVAdapter.ViewHolder>() {
 
@@ -30,7 +31,7 @@ class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): Recyc
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
-    ): SavedsongRVAdapter.ViewHolder {
+    ): ViewHolder {
         var binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )

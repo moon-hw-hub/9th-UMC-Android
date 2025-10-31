@@ -1,15 +1,21 @@
-package com.example.flo
+package com.example.flo.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.flo.albumfrag.AlbumFragment
+import com.example.flo.albumfrag.AlbumRVAdapter
+import com.example.flo.home.BannerVPAdapter
+import com.example.flo.R
 import com.example.flo.databinding.FragmentHomeBinding
+import com.example.flo.dataclasses.Album
+import com.example.flo.dataclasses.Song
+import com.example.flo.activities.MainActivity
 import com.google.gson.Gson
-
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -45,25 +51,26 @@ class HomeFragment : Fragment() {
                     coverImage = R.drawable.img_album_exp,
                     songs = arrayListOf(
                         Song("01", "Butter", "방탄소년단 (BTS)"),
-                        Song("02", "Permission to Dance","방탄소년단 (BTS)"),
-                        Song("03", "Butter (Instrumental)","방탄소년단 (BTS)"),
+                        Song("02", "Permission to Dance", "방탄소년단 (BTS)"),
+                        Song("03", "Butter (Instrumental)", "방탄소년단 (BTS)"),
                         Song("04", "Permission to Dance (Instrumental)", "방탄소년단 (BTS)")
                     )
-                    ))
+                )
+            )
             add(
                 Album(
                     title = "Lilac",
                     singer = "아이유 (IU)",
                     coverImage = R.drawable.img_album_exp2,
                     songs = arrayListOf(
-                        Song("01","라일락", "아이유 (IU)"),
-                        Song("02" , "Flu", "아이유 (IU)"),
-                        Song("03","Coin", "아이유 (IU)"),
-                        Song("04", "봄 안녕 봄","아이유 (IU)"),
+                        Song("01", "라일락", "아이유 (IU)"),
+                        Song("02", "Flu", "아이유 (IU)"),
+                        Song("03", "Coin", "아이유 (IU)"),
+                        Song("04", "봄 안녕 봄", "아이유 (IU)"),
                         Song("05", "Celebrity", "아이유 (IU)"),
                         Song("06", "돌림노래", "아이유 (IU)"),
-                        Song("07", "빈 컵","아이유 (IU)"),
-                        Song("08", "아이와 나의 바다","아이유 (IU)"),
+                        Song("07", "빈 컵", "아이유 (IU)"),
+                        Song("08", "아이와 나의 바다", "아이유 (IU)"),
                         Song("09", "어푸 (Ah puh )", "아이유 (IU)"),
                         Song("10", "에필로그", "아이유 (IU)")
                     )
@@ -73,7 +80,9 @@ class HomeFragment : Fragment() {
                 Album(
                     title = "Temp",
                     singer = "김시선 (UMC)",
-                    coverImage = R.drawable.img_potcast_exp))
+                    coverImage = R.drawable.img_potcast_exp
+                )
+            )
             add(
                 Album(
                     title = "Classic",
@@ -95,8 +104,10 @@ class HomeFragment : Fragment() {
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
-        binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context,
-            LinearLayoutManager.HORIZONTAL, false)
+        binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.HORIZONTAL, false
+        )
 
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
             override fun onItemClick(album: Album) {

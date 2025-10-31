@@ -1,21 +1,19 @@
-package com.example.flo
+package com.example.flo.activities
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.flo.ui.theme.FLOTheme
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.databinding.ActivityMainBinding
+import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import com.example.flo.home.HomeFragment
+import com.example.flo.locker.LockerFragment
+import com.example.flo.look.LookFragment
+import com.example.flo.R
+import com.example.flo.search.SearchFragment
+import com.example.flo.dataclasses.Song
+import com.example.flo.activities.SongActivity
+import com.example.flo.databinding.ActivityMainBinding
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
@@ -25,8 +23,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val song = Song(binding.mainMiniplayerTitleTv.text.toString(),
-            binding.mainMiniplayerSingerTv.text.toString())
+        val song = Song(
+            binding.mainMiniplayerTitleTv.text.toString(),
+            binding.mainMiniplayerSingerTv.text.toString()
+        )
 
 
         binding.mainPlayerCl.setOnClickListener {

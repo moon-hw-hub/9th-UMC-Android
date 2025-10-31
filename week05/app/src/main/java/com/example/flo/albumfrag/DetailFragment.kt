@@ -1,13 +1,12 @@
-package com.example.flo
+package com.example.flo.albumfrag
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.flo.databinding.FragmentDetailBinding
-import android.util.Log
-
 
 class DetailFragment : Fragment() {
     lateinit var binding : FragmentDetailBinding

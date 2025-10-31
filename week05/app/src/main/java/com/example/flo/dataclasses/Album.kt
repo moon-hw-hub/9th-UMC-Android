@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.dataclasses
 
 data class Album(
     var title: String? = "",
@@ -7,4 +7,3 @@ data class Album(
     // 수록곡 정보용 arraylist
     var songs: ArrayList<Song>? = arrayListOf()
 )
-

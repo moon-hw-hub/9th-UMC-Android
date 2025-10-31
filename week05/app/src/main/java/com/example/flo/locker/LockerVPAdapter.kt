@@ -1,10 +1,8 @@
-package com.example.flo
+package com.example.flo.locker
 
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.gson.Gson
-import android.os.Bundle
 
 class LockerVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int = 3
@@ -15,13 +13,16 @@ class LockerVPAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 //        val songJson = gson.toJson(song)
 
         return when(position) {
-            0 -> {SavedsongFragment()
+            0 -> {
+                SavedsongFragment()
 
             }
             1 -> {
                 SongfileFragment()
             }
-            else -> {SavedalbumFragment()}
+            else -> {
+                SavedalbumFragment()
+            }
         }
 
     }

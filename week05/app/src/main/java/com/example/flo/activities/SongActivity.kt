@@ -1,16 +1,13 @@
-package com.example.flo
+package com.example.flo.activities
 
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.databinding.ActivityMainBinding
+import com.example.flo.R
 import com.example.flo.databinding.ActivitySongBinding
-import android.content.Intent
-import android.widget.ImageView
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.PorterDuff
-
 
 class SongActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongBinding

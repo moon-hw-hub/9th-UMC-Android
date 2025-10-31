@@ -1,4 +1,4 @@
-package com.example.flo
+package com.example.flo.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
