@@ -132,8 +132,8 @@ class SongActivity : AppCompatActivity() {
         song.second = 0 // 곡 시간 초기화
         song.isPlaying = true // 재생 상태 설정
 
-        setPlayer(song) // UI 업데이트
-        startTimer() // 새로운 타이머 스레드를 생성하고 재시작
+        setPlayer(song) // 송 데이터를 다시 세팅 -> setPlayerStatus함수 호출 -> true이므로 ||버튼이 나옴
+        startTimer() // 새로운 타이머 스레드를 생성하고 실행
     }
 
     inner class Timer(private val playTime: Int, var isPlaying: Boolean = true):Thread() {
