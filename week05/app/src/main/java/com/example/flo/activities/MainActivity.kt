@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_FLO)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,10 +42,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("isPlaying", song.isPlaying)
             startActivity(intent)
         }
-
-        //if (intent.hasExtra("albumname")) {
-        //    Toast.makeText(this, intent.getStringExtra("albumname"), Toast.LENGTH_SHORT).show()
-        //}
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
