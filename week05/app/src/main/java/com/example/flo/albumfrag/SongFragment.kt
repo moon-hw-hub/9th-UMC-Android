@@ -27,6 +27,7 @@ class SongFragment : Fragment() {
         val albumJson = arguments?.getString("album")
         val album = Gson().fromJson(albumJson, Album::class.java)
 
+        //리사이클러뷰 어댑터 등록
         val songRVAdapter = SongRVAdapter(album.songs ?: arrayListOf())
         binding.albumTrackRv.adapter = songRVAdapter
         binding.albumTrackRv.layoutManager = LinearLayoutManager(context)

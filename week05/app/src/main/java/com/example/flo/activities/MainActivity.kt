@@ -23,24 +23,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //하단플레이어에 나오는 노래를 Song객체에 저장
         val song = Song(
-            binding.mainMiniplayerTitleTv.text.toString(),
-            binding.mainMiniplayerSingerTv.text.toString()
+            title = binding.mainMiniplayerTitleTv.text.toString(),
+            singer = binding.mainMiniplayerSingerTv.text.toString(),
+            second = 0, playTime = 60, isPlaying = false
         )
 
-
+        //하단의 플레이어를 누르면 송액티비티로 전환. intent에 재생 노래 정보를 넣음
         binding.mainPlayerCl.setOnClickListener {
             //finish() //현재 액티비티 종료
             val intent = Intent(this, SongActivity::class.java)
             intent.putExtra("title", song.title)
             intent.putExtra("singer", song.singer)
+            intent.putExtra("second", song.second)
+            intent.putExtra("playTime", song.playTime)
+            intent.putExtra("isPlaying", song.isPlaying)
             startActivity(intent)
-            //finish() //현재 액티비티 종료
         }
 
-        if (intent.hasExtra("albumname")) {
-            Toast.makeText(this, intent.getStringExtra("albumname"), Toast.LENGTH_SHORT).show()
-        }
+        //if (intent.hasExtra("albumname")) {
+        //    Toast.makeText(this, intent.getStringExtra("albumname"), Toast.LENGTH_SHORT).show()
+        //}
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
