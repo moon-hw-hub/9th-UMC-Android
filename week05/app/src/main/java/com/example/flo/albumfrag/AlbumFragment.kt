@@ -53,7 +53,6 @@ class AlbumFragment : Fragment() {
         binding.albumContentVp.adapter = albumAdapter
         TabLayoutMediator(binding.albumContentTb, binding.albumContentVp) { tap, position ->
             tap.text = information[position]
-
         }.attach()
 
         return binding.root
@@ -64,7 +63,5 @@ class AlbumFragment : Fragment() {
         binding.albumMusicTitleTv.text = album.title.toString()
         binding.albumSingerNameTv.text = album.singer.toString()
     }
-
-
 
 }

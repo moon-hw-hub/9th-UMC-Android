@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         //BottomNavigationView를 눌렀을 때 Fragment 변경하기
         binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
-
                 //매인 화면
                 R.id.homeFragment -> {
                     supportFragmentManager.beginTransaction()

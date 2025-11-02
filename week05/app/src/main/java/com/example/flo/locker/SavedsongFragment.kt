@@ -23,7 +23,6 @@ class SavedsongFragment : Fragment() {
         binding = FragmentSavedsongBinding.inflate(inflater, container, false)
         //Log.d("FragmentCheck", "SavedsongFragment onCreateView")
 
-
         // 곡 리스트 더미 데이터 생성
         savedSongList.apply {
             add(SavedSong(R.drawable.img_album_exp, "Butter", "방탄소년단 (BTS)"))
@@ -31,10 +30,11 @@ class SavedsongFragment : Fragment() {
             add(SavedSong(R.drawable.img_first_album_default, "운명 교향곡", "베토벤 (Beethoven)"))
         }
 
+        //리사이클러뷰 어댑터 등록
         val savedsongRVAdapter = SavedsongRVAdapter(savedSongList)
         binding.savedSongRv.adapter = savedsongRVAdapter
 
-
+        //등록한 리사이클러뷰 어댑터 객체에 리스너 세팅
         savedsongRVAdapter.setMyItemClickListener(object : SavedsongRVAdapter.MyItemClickListener {
             override fun onRemoveSong(position: Int) {
                 savedsongRVAdapter.removeItem(position)

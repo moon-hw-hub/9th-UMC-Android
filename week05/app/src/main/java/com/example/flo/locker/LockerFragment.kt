@@ -30,9 +30,11 @@ class LockerFragment : Fragment() {
 //            add(SavedSong(img = R.drawable.img_album_exp2, title = "라일락", singer = "아이유 (IU)"))
 //        }
 
-        //뷰페이저 어댑터
+        //뷰페이저 어댑터 등록
         val lockerAdapter = LockerVPAdapter(this)
         binding.lockerContentVp.adapter = lockerAdapter
+
+        //탭레이아웃과 연결
         TabLayoutMediator(binding.lockerContentTb, binding.lockerContentVp) { tap, position ->
             tap.text = information[position]
 

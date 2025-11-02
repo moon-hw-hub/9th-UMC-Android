@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.albumfrag.AlbumFragment
-import com.example.flo.albumfrag.AlbumRVAdapter
+import com.example.flo.home.AlbumRVAdapter
 import com.example.flo.home.BannerVPAdapter
 import com.example.flo.R
 import com.example.flo.databinding.FragmentHomeBinding
@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
 //                .replace(R.id.main_frm, albumFragment)
 //                .commitAllowingStateLoss()
 //        }
-        // 데이터 리스트 생성 더미 데이터
+        // 앨범 데이터 리스트 생성 더미 데이터
         albumDatas.apply {
             add(
                 Album(
@@ -101,14 +101,17 @@ class HomeFragment : Fragment() {
             )
         }
 
+        //리사이클러뷰 어댑터 등록 (앨범 나열)
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
 
+        //리사이클러뷰의 레이아웃 매니저 설정
         binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(
             context,
             LinearLayoutManager.HORIZONTAL, false
         )
 
+        //등록한 리사이클러뷰 어댑터 객체에 클릭리스너 세팅
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
             override fun onItemClick(album: Album) {
                 changeAlbumFragment(album)
@@ -119,7 +122,7 @@ class HomeFragment : Fragment() {
 //            }
         })
 
-       //광고 배너들 연결
+       //뷰페이저2에 광고 배너들 연결
         val bannerAdapter = BannerVPAdapter(this)
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp))
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
@@ -129,7 +132,7 @@ class HomeFragment : Fragment() {
         bannerAdapter.addFragment(BannerFragment(R.drawable.img_home_viewpager_exp2))
         binding.homeBannerVp.adapter = bannerAdapter
 
-        //광고 뷰 페이지가 좌우로 스크롤 될수 있도록 지정
+        //광고 뷰 페이저가 좌우로 스크롤 될수 있도록 지정
         binding.homeBannerVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         return binding.root
@@ -146,6 +149,5 @@ class HomeFragment : Fragment() {
             })
             .commitAllowingStateLoss()
     }
-
 
 }

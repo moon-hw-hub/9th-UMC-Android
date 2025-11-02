@@ -1,4 +1,4 @@
-package com.example.flo.albumfrag
+package com.example.flo.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import com.example.flo.dataclasses.Album
 
 class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adapter<AlbumRVAdapter.ViewHolder>() {
 
+    //리스너 인터페이스 정의
     interface MyItemClickListener {
         fun onItemClick(album: Album)
 //        fun onRemoveAlbum(position: Int)
@@ -34,7 +35,6 @@ class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adap
         val binding: ItemAlbumBinding = ItemAlbumBinding.inflate(
             LayoutInflater.from(viewGroup.context), viewGroup, false
         )
-
         //아이템 뷰 객체를 던져줌
         return ViewHolder(binding)
     }
@@ -43,8 +43,7 @@ class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adap
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(albumList[position])
         holder.itemView.setOnClickListener { myItemClickListener.onItemClick(albumList[position]) }
-//        holder.binding.itemAlbumTitleTv.setOnClickListener { myItemClickListener.onRemoveAlbum(position) }
-
+        //holder.binding.itemAlbumTitleTv.setOnClickListener { myItemClickListener.onRemoveAlbum(position) }
     }
 
     //데이터 세트 크기를 알려줌. 리사이클러뷰의 끝이 어딘지
