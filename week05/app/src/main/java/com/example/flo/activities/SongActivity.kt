@@ -15,7 +15,7 @@ import com.example.flo.dataclasses.Song
 
 class SongActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongBinding
-    lateinit var song: Song
+    lateinit var song: Song // 첫 isPlaying은 False
     lateinit var timer: Timer
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class SongActivity : AppCompatActivity() {
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initSong() //송 데이터 받아옴
+        initSong() //송 데이터 받아와 실행
         setPlayer(song)
 
         //우측 상단 버튼 누르면 액티비티 종료
@@ -36,9 +36,16 @@ class SongActivity : AppCompatActivity() {
         binding.songMiniplayerIv.setOnClickListener {
             setPlayerStatus(true)
         }
-
         binding.songPauseIv.setOnClickListener {
             setPlayerStatus(false)
+        }
+
+        //이전곡/다음곡
+        binding.songPreviousIv.setOnClickListener {
+            restart()
+        }
+        binding.songNextIv.setOnClickListener {
+            restart()
         }
 
         //반복재생
@@ -117,6 +124,16 @@ class SongActivity : AppCompatActivity() {
     private fun startTimer() {
         timer = Timer(song.playTime, song.isPlaying)
         timer.start()
+    }
+
+    //재시작 함수
+    private fun restart() {
+        timer.interrupt() // 기존 타이머 스레드 종료
+        song.second = 0 // 곡 시간 초기화
+        song.isPlaying = true // 재생 상태 설정
+
+        setPlayer(song) // UI 업데이트
+        startTimer() // 새로운 타이머 스레드를 생성하고 재시작
     }
 
     inner class Timer(private val playTime: Int, var isPlaying: Boolean = true):Thread() {
