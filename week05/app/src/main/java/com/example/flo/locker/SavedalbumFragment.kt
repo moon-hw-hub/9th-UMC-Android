@@ -51,6 +51,15 @@ class SavedalbumFragment : Fragment() {
             context, LinearLayoutManager.VERTICAL, false
         )
 
+        //어댑터객체에 클릭 리스너 세팅
+        savedAlbumRVAdapter.setMyItemClickListener(object:
+            SavedAlbumRVAdapter.MyItemClickListener {
+            override fun onRemoveAlbum(position: Int) {
+                savedAlbumRVAdapter.removeAlbum(position)
+            }
+            }
+        )
+
 
         val songJson = arguments?.getString("song")
         val song = Gson().fromJson(songJson, Song::class.java)

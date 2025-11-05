@@ -8,6 +8,24 @@ import com.example.flo.dataclasses.Album
 
 class SavedAlbumRVAdapter(private var albumList: ArrayList<Album>):
     RecyclerView.Adapter<SavedAlbumRVAdapter.ViewHolder>() {
+
+    interface MyItemClickListener {
+        //fun onItemClick(savedSong: SavedSong)
+        fun onRemoveAlbum(position: Int)
+    }
+
+    private lateinit var myItemClickListener: SavedAlbumRVAdapter.MyItemClickListener
+
+    fun setMyItemClickListener(itemClickListener: MyItemClickListener) {
+        myItemClickListener = itemClickListener
+    }
+
+    fun removeAlbum(position: Int) {
+        albumList.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
         viewType: Int
@@ -21,6 +39,7 @@ class SavedAlbumRVAdapter(private var albumList: ArrayList<Album>):
 
     override fun onBindViewHolder(holder: SavedAlbumRVAdapter.ViewHolder, position: Int) {
         holder.bind(albumList[position])
+        holder.binding.albumCrudIv.setOnClickListener { myItemClickListener.onRemoveAlbum(position) }
     }
 
     override fun getItemCount(): Int = albumList.size
