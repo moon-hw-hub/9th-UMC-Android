@@ -1,0 +1,89 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- 앨범 이미지 카드 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_album_cover_img_cardView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="7dp"
+        app:cardElevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:id="@+id/item_album_cover_img_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_album_exp2"/>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 텍스트 묶음 리니어레이아웃 -->
+    <LinearLayout
+        android:id="@+id/album_text_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/item_album_cover_img_cardView"
+        app:layout_constraintTop_toTopOf="@id/item_album_cover_img_cardView"
+        app:layout_constraintBottom_toBottomOf="@id/item_album_cover_img_cardView"
+        app:layout_constraintEnd_toStartOf="@id/album_play_iv"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp">
+
+        <TextView
+            android:id="@+id/album_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제목"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/album_singer_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가수"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/album_information_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="앨범 상세 정보"
+            android:textSize="12sp"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
+
+    <!-- 재생 버튼 -->
+    <ImageView
+        android:id="@+id/album_play_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/btn_miniplayer_play"
+        app:layout_constraintStart_toEndOf="@id/album_text_container"
+        app:layout_constraintEnd_toStartOf="@id/album_crud_iv"
+        app:layout_constraintTop_toTopOf="@id/album_text_container"
+        app:layout_constraintBottom_toBottomOf="@id/album_text_container"/>
+
+    <!-- CRUD 버튼 -->
+    <ImageView
+        android:id="@+id/album_crud_iv"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/btn_player_more"
+        app:layout_constraintStart_toEndOf="@id/album_play_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/album_text_container"
+        app:layout_constraintBottom_toBottomOf="@id/album_text_container"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
