@@ -1,8 +1,10 @@
 package com.example.flo.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,11 +14,14 @@ import com.example.flo.R
 import com.example.flo.databinding.ActivitySongBinding
 import com.example.flo.dataclasses.PlayedSong
 import com.example.flo.dataclasses.Song
+import com.google.gson.Gson
 
 class SongActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongBinding
     lateinit var song: Song // 첫 isPlaying은 False
     lateinit var timer: Timer
+    private var mediaPlayer: MediaPlayer? = null
+    private var gson: Gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,12 +78,6 @@ class SongActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    //앱이 꺼질때 스레드 종료
-    override fun onDestroy() {
-        super.onDestroy()
-        timer.interrupt()
     }
 
     //메인액티비티에서 song데이터를 받아오는 함수
@@ -171,5 +170,27 @@ class SongActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    // 사용자가 포커스를 잃었을 때 음악 중지
+    override fun onPause() {
+        super.onPause()
+        setPlayerStatus(false)
+        song.second = ((binding.songProgressSb.progress*song.playTime)/100)/1000
+        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+        val editor = sharedPreferences.edit() //에디터
+        val songJson = gson.toJson(song)
+        editor.putString("songData", songJson) //깃에서 커밋과 같음
+
+        editor.apply() //꼭 쓰기!! 깃에서 push와 같음
+
+    }
+
+    //앱이 꺼질때 스레드 종료
+    override fun onDestroy() {
+        super.onDestroy()
+        timer.interrupt()
+//        mediaPlayer?.release() // 미디어플레이어가 갖고 있던 리소스 해제
+//        mediaPlayer? = null //미디어 플레이어 해제
     }
 }
