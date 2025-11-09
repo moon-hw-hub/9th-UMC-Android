@@ -43,6 +43,7 @@ class MusicService : Service() {
 
         //MediaPlayer 및 변수 초기화 (임의로 노래를 연결)
         if (mediaPlayer == null) {
+
             mediaPlayer = MediaPlayer.create(this, R.raw.music_lilac)
             currentSongTitle = initialTitle
             currentSongArtist = initialArtist
@@ -51,7 +52,7 @@ class MusicService : Service() {
             }
         }
 
-        //알람도 같이 설정
+        //알람도 같이 설정 - 재생 전까지 보류
         val notification = createNotification()
         startForeground(NOTI_ID, notification)
 
