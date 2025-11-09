@@ -10,9 +10,10 @@ import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.flo.services.Foreground
 import com.example.flo.R
 import com.example.flo.databinding.ActivitySongBinding
-import com.example.flo.dataclasses.PlayedSong
 import com.example.flo.dataclasses.Song
 import com.google.gson.Gson
 import java.util.Locale
@@ -29,6 +30,10 @@ class SongActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.songLikeIv.setOnClickListener {
+            serviceStart()
+        }
 
         initSong() //송 데이터 받아와 실행
         setPlayer(song)
@@ -180,9 +185,9 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    // 사용자가 포커스를 잃었을 때 음악 중지   ??onStop으로 하니까 되는데요 ㅋㅋ
-    override fun onStop() {
-        super.onStop()
+    // 사용자가 포커스를 잃었을 때 음악 중지
+    override fun onPause() {
+        super.onPause()
         setPlayerStatus(false)
         song.second = ((binding.songProgressSb.progress*song.playTime)/100)/1000
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
@@ -198,7 +203,14 @@ class SongActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         timer.interrupt()
-//        mediaPlayer?.release() // 미디어플레이어가 갖고 있던 리소스 해제
+//        mediaPlayer?.release() // 미디어 플레이어가 갖고 있던 리소스 해제
 //        mediaPlayer? = null //미디어 플레이어 해제
+    }
+
+    //기본 서비스 예제 테스트 용 코드
+    fun serviceStart() {
+        val intent = Intent(this, Foreground::class.java)
+        ContextCompat.startForegroundService(this, intent)
+        Log.d("log_service", "start")
     }
 }

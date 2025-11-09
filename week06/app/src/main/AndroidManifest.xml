@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flo">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FLO">
+        <service
+            android:name=".services.MusicService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".services.Foreground"
+            android:enabled="true"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback" />
+
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"
@@ -19,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.flo.activities.SongActivity"/>
+        <activity android:name=".activities.SongActivity" />
     </application>
 
 </manifest>
