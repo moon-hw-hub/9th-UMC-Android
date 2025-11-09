@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 //        val song = Song(
 //            title = binding.mainMiniplayerTitleTv.text.toString(),
 //            singer = binding.mainMiniplayerSingerTv.text.toString(),
-//            second = 0, playTime = 60, isPlaying = false
+//            second = 0, playTime = 60, isPlaying = false,
+//            music = "music_lilac"
 //        )
 
         //하단의 플레이어를 누르면 송액티비티로 전환. intent에 재생 노래 정보를 넣음
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("second", song.second)
             intent.putExtra("playTime", song.playTime)
             intent.putExtra("isPlaying", song.isPlaying)
+            intent.putExtra("music", song.music)
             startActivity(intent)
         }
 
@@ -109,8 +111,6 @@ class MainActivity : AppCompatActivity() {
 
         setMiniPlayer(song)
         Log.d("MainActivity", "Loaded song: ${song.title}, ${song.second}/${song.playTime}")
-
-
 
     }
 

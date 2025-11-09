@@ -15,6 +15,7 @@ import com.example.flo.databinding.ActivitySongBinding
 import com.example.flo.dataclasses.PlayedSong
 import com.example.flo.dataclasses.Song
 import com.google.gson.Gson
+import java.util.Locale
 
 class SongActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongBinding
@@ -32,7 +33,7 @@ class SongActivity : AppCompatActivity() {
         initSong() //송 데이터 받아와 실행
         setPlayer(song)
 
-        //우측 상단 버튼 누르면 액티비티 종료
+        //우측 상단 버튼 누르면 메인액티비티로 이동, 데이터 전달 구현하자
         binding.songDownIb.setOnClickListener{
             finish()
         }
@@ -88,7 +89,8 @@ class SongActivity : AppCompatActivity() {
                 singer = intent.getStringExtra("singer")!!,
                 second = intent.getIntExtra("second",0),
                 playTime = intent.getIntExtra("playTime",0),
-                isPlaying = intent.getBooleanExtra("isPlaying", false)
+                isPlaying = intent.getBooleanExtra("isPlaying", false),
+                music = intent.getStringExtra("music")!!
             )
         }
         startTimer()
@@ -98,9 +100,11 @@ class SongActivity : AppCompatActivity() {
     private fun setPlayer(song: Song) {
         binding.songMusicTitleTv.text = intent.getStringExtra("title")
         binding.songSingerNameTv.text = intent.getStringExtra("singer")
-        binding.songStartTimeTv.text = String.format("%02d:%02d", song.second / 60, song.second % 60)
-        binding.songEndTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.second % 60)
+        binding.songStartTimeTv.text = String.format(Locale.getDefault(), "%02d:%02d", song.second / 60, song.second % 60)
+        binding.songEndTimeTv.text = String.format(Locale.getDefault(), "%02d:%02d", song.playTime / 60, song.playTime % 60)
         binding.songProgressSb.progress = (song.second*1000 / song.playTime)
+        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+        mediaPlayer = MediaPlayer.create(this, music)
 
         setPlayerStatus(song.isPlaying)
     }
@@ -113,9 +117,13 @@ class SongActivity : AppCompatActivity() {
         if(isPlaying){
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+            mediaPlayer?.start()
         } else {
             binding.songMiniplayerIv.visibility = View.VISIBLE
             binding.songPauseIv.visibility = View.GONE
+            if(mediaPlayer?.isPlaying==true){
+                mediaPlayer?.pause()
+            }
         }
     }
 
@@ -172,9 +180,9 @@ class SongActivity : AppCompatActivity() {
         }
     }
 
-    // 사용자가 포커스를 잃었을 때 음악 중지
-    override fun onPause() {
-        super.onPause()
+    // 사용자가 포커스를 잃었을 때 음악 중지   ??onStop으로 하니까 되는데요 ㅋㅋ
+    override fun onStop() {
+        super.onStop()
         setPlayerStatus(false)
         song.second = ((binding.songProgressSb.progress*song.playTime)/100)/1000
         val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
