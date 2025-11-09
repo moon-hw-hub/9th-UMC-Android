@@ -127,8 +127,11 @@ class SongActivity : AppCompatActivity() {
 
     private fun startAndBindMusicService() {
         val intent = Intent(this, MusicService::class.java)
+        intent.putExtra("songTitle", song.title)
+        intent.putExtra("songArtist", song.singer)
+        intent.putExtra("isPlaying", song.isPlaying)
 
-        // 이미 실행 중인지 확인 후 startForegroundService() 호출
+        //이미 실행 중인지 확인
         if (!isServiceRunning(MusicService::class.java)) {
             ContextCompat.startForegroundService(this, intent)
         }
