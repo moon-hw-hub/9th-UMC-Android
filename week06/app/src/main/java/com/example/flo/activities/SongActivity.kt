@@ -70,7 +70,6 @@ class SongActivity : AppCompatActivity() {
                 willPlayAll = false
             }
         }
-
     }
 
     //메인액티비티에서 song데이터를 받아오는 함수
