@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -66,4 +69,10 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("com.google.code.gson:gson:2.13.2")
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //roomDB
+    implementation("androidx.room:room-ktx:2.8.3")
+    implementation("androidx.room:room-runtime:2.8.3")
+    //implementation("androidx.room:room-compiler:2.8.3")
+    kapt("androidx.room:room-compiler:2.8.3")
 }

@@ -3,7 +3,6 @@ package com.example.flo.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.home.HomeFragment
@@ -11,8 +10,7 @@ import com.example.flo.locker.LockerFragment
 import com.example.flo.look.LookFragment
 import com.example.flo.R
 import com.example.flo.search.SearchFragment
-import com.example.flo.dataclasses.Song
-import com.example.flo.activities.SongActivity
+import com.example.flo.data.Song
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
 

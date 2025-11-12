@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.flo.albumfrag.AlbumVPAdapter
 import com.example.flo.R
 import com.example.flo.activities.MainActivity
 import com.example.flo.databinding.FragmentAlbumBinding
-import com.example.flo.dataclasses.Album
-import com.example.flo.albumfrag.DetailFragment
+import com.example.flo.data.Album
 import com.example.flo.home.HomeFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson

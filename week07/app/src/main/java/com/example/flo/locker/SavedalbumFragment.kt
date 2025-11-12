@@ -1,7 +1,6 @@
 package com.example.flo.locker
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentSavedalbumBinding
-import com.example.flo.dataclasses.Album
-import com.example.flo.dataclasses.Song
+import com.example.flo.data.Album
+import com.example.flo.data.Song
 import com.google.gson.Gson
 
 class SavedalbumFragment : Fragment() {

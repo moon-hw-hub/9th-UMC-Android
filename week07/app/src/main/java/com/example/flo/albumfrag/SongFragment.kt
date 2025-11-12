@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
-import com.example.flo.albumfrag.SongRVAdapter
 import com.example.flo.databinding.FragmentSongBinding
-import com.example.flo.dataclasses.Album
+import com.example.flo.data.Album
 import com.google.gson.Gson
 
 class SongFragment : Fragment() {

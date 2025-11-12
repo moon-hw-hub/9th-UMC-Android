@@ -8,12 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.flo.albumfrag.AlbumFragment
-import com.example.flo.home.AlbumRVAdapter
-import com.example.flo.home.BannerVPAdapter
 import com.example.flo.R
 import com.example.flo.databinding.FragmentHomeBinding
-import com.example.flo.dataclasses.Album
-import com.example.flo.dataclasses.Song
+import com.example.flo.data.Album
+import com.example.flo.data.Song
 import com.example.flo.activities.MainActivity
 import com.google.gson.Gson
 

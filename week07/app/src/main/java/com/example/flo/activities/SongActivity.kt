@@ -1,7 +1,5 @@
 package com.example.flo.activities
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.media.MediaPlayer
@@ -10,10 +8,8 @@ import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.R
 import com.example.flo.databinding.ActivitySongBinding
-import com.example.flo.dataclasses.PlayedSong
-import com.example.flo.dataclasses.Song
+import com.example.flo.data.Song
 import com.google.gson.Gson
 
 class SongActivity : AppCompatActivity() {

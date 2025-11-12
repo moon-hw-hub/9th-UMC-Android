@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSavedsongBinding
-import com.example.flo.dataclasses.Song
+import com.example.flo.data.Song
 
 class LockerRVAdapter(private var songs: ArrayList<Song>) : RecyclerView.Adapter<LockerRVAdapter.ViewHolder>()
  {

@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.flo.R
-import com.example.flo.locker.SavedsongRVAdapter
 import com.example.flo.databinding.FragmentSavedsongBinding
-import com.example.flo.dataclasses.SavedSong
+import com.example.flo.data.SavedSong
 
 class SavedsongFragment : Fragment() {
 
