@@ -1,5 +1,6 @@
 package com.example.flo.data
 
+import android.R
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -24,5 +25,8 @@ interface SongDao {
     //WHERE을 조건문처럼 사용, id값으로 해당하는 송을 받아옴
     @Query("SELECT*FROM SongTable WHERE id=:id")
     fun getSong(id: Int): Song
+
+    @Query("UPDATE SongTable SET isLike= :isLike WHERE id = :id")
+    fun updateIsLikeById(isLike: Boolean, id: Int)
 
 }

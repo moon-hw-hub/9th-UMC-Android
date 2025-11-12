@@ -13,6 +13,7 @@ import com.example.flo.databinding.ActivitySongBinding
 import com.example.flo.data.Song
 import com.example.flo.data.SongDatabase
 import com.google.gson.Gson
+import com.example.flo.R
 
 class SongActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySongBinding
@@ -106,6 +107,10 @@ class SongActivity : AppCompatActivity() {
         binding.songNextIv.setOnClickListener {
             moveSong(+1)
         }
+
+        binding.songLikeIv.setOnClickListener {
+            setLike(songs[nowPos].isLike)
+        }
     }
 
     //SharedPreference에서 id값을 받아와서 songid를 통해서 songs와 비교해서 index값을 구하는 함수
@@ -117,6 +122,18 @@ class SongActivity : AppCompatActivity() {
         Log.d("now Song ID", songs[nowPos].id.toString())
         startTimer()
         setPlayer(songs[nowPos])
+    }
+
+    //좋아요 버튼 이벤트
+    private fun setLike(isLike: Boolean) {
+        songs[nowPos].isLike = !isLike
+        songDB.songDao().updateIsLikeById(!isLike,songs[nowPos].id)
+
+        if (!isLike) {
+            binding.songLikeIv.setImageResource(R.drawable.ic_my_like_on)
+        }else {
+            binding.songLikeIv.setImageResource(R.drawable.ic_my_like_off)
+        }
     }
 
     private fun moveSong(direct: Int) {
@@ -151,14 +168,22 @@ class SongActivity : AppCompatActivity() {
 
     //송 데이터를 뷰에 렌더링하는 함수
     private fun setPlayer(song: Song) {
-        val music = resources.getIdentifier(song.music, "raw", this.packageName)
-        mediaPlayer = MediaPlayer.create(this, music)
         binding.songMusicTitleTv.text = song.title
         binding.songSingerNameTv.text = song.singer
         binding.songStartTimeTv.text = String.format("%02d:%02d", song.second / 60, song.second % 60)
         binding.songEndTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
         binding.songAlbumIv.setImageResource(song.coverImg!!)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
+
+        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+        mediaPlayer = MediaPlayer.create(this, music)
+
+        //좋아요
+        if (song.isLike) {
+            binding.songLikeIv.setImageResource(R.drawable.ic_my_like_on)
+        }else {
+            binding.songLikeIv.setImageResource(R.drawable.ic_my_like_off)
+        }
         setPlayerStatus(song.isPlaying)
     }
 

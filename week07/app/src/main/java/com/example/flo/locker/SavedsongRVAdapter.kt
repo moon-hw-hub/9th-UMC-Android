@@ -8,6 +8,28 @@ import com.example.flo.data.SavedSong
 
 class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): RecyclerView.Adapter<SavedsongRVAdapter.ViewHolder>() {
 
+    override fun onCreateViewHolder(
+        viewGroup: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        var binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
+            LayoutInflater.from(viewGroup.context), viewGroup, false
+        )
+
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int
+    ) {
+        holder.bind(savedsongList[position])
+        holder.binding.songMoreIv.setOnClickListener { myItemClickListener.onRemoveSong(position) }
+
+    }
+
+    override fun getItemCount():Int = savedsongList.size
+
     interface MyItemClickListener {
         //fun onItemClick(savedSong: SavedSong)
         fun onRemoveSong(position: Int)
@@ -28,28 +50,6 @@ class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): Recyc
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(
-        viewGroup: ViewGroup,
-        viewType: Int
-    ): ViewHolder {
-        var binding: ItemSavedsongBinding = ItemSavedsongBinding.inflate(
-            LayoutInflater.from(viewGroup.context), viewGroup, false
-        )
-
-        return ViewHolder(binding)
-    }
-
-
-    override fun onBindViewHolder(
-        holder: ViewHolder,
-        position: Int
-    ) {
-        holder.bind(savedsongList[position])
-        holder.binding.songMoreIv.setOnClickListener { myItemClickListener.onRemoveSong(position) }
-
-    }
-
-    override fun getItemCount():Int = savedsongList.size
 
     inner class ViewHolder(var binding: ItemSavedsongBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(savedsong: SavedSong) {

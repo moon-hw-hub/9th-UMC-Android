@@ -22,13 +22,6 @@ class LockerFragment : Fragment() {
     ): View? {
         binding = FragmentLockerBinding.inflate(inflater, container, false)
 
-        //데이터 리스트 생성 더미 데이터
-//        songDatas.apply {
-//            add(SavedSong(img = R.drawable.img_album_exp, title = "Butter",
-//                singer = "방탄소년단 (BTS)"))
-//            add(SavedSong(img = R.drawable.img_album_exp2, title = "라일락", singer = "아이유 (IU)"))
-//        }
-
         //뷰페이저 어댑터 등록
         val lockerAdapter = LockerVPAdapter(this)
         binding.lockerContentVp.adapter = lockerAdapter
