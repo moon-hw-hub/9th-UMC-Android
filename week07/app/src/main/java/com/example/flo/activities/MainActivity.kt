@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
 
-        if (songs.isNotEmpty()) return
+        //if (songs.isNotEmpty()) return
 
         songDB.songDao().insert(
             Song(

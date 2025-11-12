@@ -34,7 +34,7 @@ class SongActivity : AppCompatActivity() {
         initPlayList()
         initSong() //송 데이터 받아와 실행
         initClickListener()
-        setPlayer(songs[nowPos])
+        //setPlayer(songs[nowPos])
 
         //반복재생
         var isRoop = false
@@ -128,15 +128,15 @@ class SongActivity : AppCompatActivity() {
             Toast.makeText(this, "last song", Toast.LENGTH_SHORT).show()
             return
         }
-        nowPos+=direct
-
+        nowPos += direct
         timer.interrupt()
-        //mediaPlayer?.stop()
-        mediaPlayer?.release() // 미디어플레이어가 갖고 있던 리소스 해제
-        mediaPlayer = null //미디어 플레이어 해제
 
-        setPlayer(songs[nowPos]) //여기서 미디어플레이어도 새로 할당됨
-        startTimer()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
+        setPlayer(songs[nowPos])
+        startTimer() // ✅ 새 MediaPlayer로 세팅된 후 타이머 시작
+        Log.d("현재 곡", songs[nowPos].music)
 
     }
 
@@ -151,14 +151,14 @@ class SongActivity : AppCompatActivity() {
 
     //송 데이터를 뷰에 렌더링하는 함수
     private fun setPlayer(song: Song) {
+        val music = resources.getIdentifier(song.music, "raw", this.packageName)
+        mediaPlayer = MediaPlayer.create(this, music)
         binding.songMusicTitleTv.text = song.title
         binding.songSingerNameTv.text = song.singer
         binding.songStartTimeTv.text = String.format("%02d:%02d", song.second / 60, song.second % 60)
-        binding.songEndTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.second % 60)
+        binding.songEndTimeTv.text = String.format("%02d:%02d", song.playTime / 60, song.playTime % 60)
         binding.songAlbumIv.setImageResource(song.coverImg!!)
         binding.songProgressSb.progress = (song.second * 1000 / song.playTime)
-        val music = resources.getIdentifier(song.music, "raw", this.packageName)
-        mediaPlayer = MediaPlayer.create(this, music)
         setPlayerStatus(song.isPlaying)
     }
 
