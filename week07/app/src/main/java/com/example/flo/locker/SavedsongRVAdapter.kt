@@ -1,12 +1,15 @@
 package com.example.flo.locker
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flo.databinding.ItemSavedsongBinding
 import com.example.flo.data.SavedSong
+import com.example.flo.data.Song
 
-class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): RecyclerView.Adapter<SavedsongRVAdapter.ViewHolder>() {
+class SavedsongRVAdapter(): RecyclerView.Adapter<SavedsongRVAdapter.ViewHolder>() {
+    private var songs = ArrayList<Song>()
 
     override fun onCreateViewHolder(
         viewGroup: ViewGroup,
@@ -23,12 +26,14 @@ class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): Recyc
         holder: ViewHolder,
         position: Int
     ) {
-        holder.bind(savedsongList[position])
-        holder.binding.songMoreIv.setOnClickListener { myItemClickListener.onRemoveSong(position) }
+        holder.bind(songs[position])
+        holder.binding.songMoreIv.setOnClickListener {
+            removeSong(position)
+        }
 
     }
 
-    override fun getItemCount():Int = savedsongList.size
+    override fun getItemCount():Int = songs.size
 
     interface MyItemClickListener {
         //fun onItemClick(savedSong: SavedSong)
@@ -39,23 +44,24 @@ class SavedsongRVAdapter(private var savedsongList: ArrayList<SavedSong>): Recyc
         myItemClickListener = itemClickListener
     }
 
-    fun addItem(savedSong: SavedSong) {
-        savedsongList.add(savedSong)
+    @SuppressLint("NotifyDataSetChanged")
+    fun addSongs(songs: ArrayList<Song>) {
+        this.songs.clear()
+        this.songs.addAll(songs)
+
         notifyDataSetChanged()
     }
 
-    //아이템 삭제용
-    fun removeItem(position: Int) {
-        savedsongList.removeAt(position)
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeSong(position: Int) {
+        songs.removeAt(position)
         notifyDataSetChanged()
     }
-
-
     inner class ViewHolder(var binding: ItemSavedsongBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(savedsong: SavedSong) {
-            binding.songListAlbumImgIv.setImageResource(savedsong.img)
-            binding.songMusicTitleTv.text = savedsong.title
-            binding.songSingerNameTv.text = savedsong.singer
+        fun bind(song: Song) {
+            binding.songListAlbumImgIv.setImageResource(song.coverImg!!)
+            binding.songMusicTitleTv.text = song.title
+            binding.songSingerNameTv.text = song.singer
         }
 
     }
