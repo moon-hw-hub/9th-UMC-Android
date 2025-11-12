@@ -11,6 +11,7 @@ import com.example.flo.look.LookFragment
 import com.example.flo.R
 import com.example.flo.search.SearchFragment
 import com.example.flo.data.Song
+import com.example.flo.data.SongDatabase
 import com.example.flo.databinding.ActivityMainBinding
 import com.google.gson.Gson
 
@@ -27,30 +28,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inputDummySongs()
+
         //하단플레이어에 나오는 노래를 Song객체에 저장
         val song = Song(
             title = binding.mainMiniplayerTitleTv.text.toString(),
             singer = binding.mainMiniplayerSingerTv.text.toString(),
             second = 0, playTime = 60, isPlaying = false, music = "music_lilac"
         )
-//        val song = Song(
-//            title = binding.mainMiniplayerTitleTv.text.toString(),
-//            singer = binding.mainMiniplayerSingerTv.text.toString(),
-//            second = 0, playTime = 60, isPlaying = false
-//        )
 
-        //하단의 플레이어를 누르면 송액티비티로 전환. intent에 재생 노래 정보를 넣음
+        //하단의 플레이어를 누르면 송액티비티로 전환. db에 노래의 id를 저장
         binding.mainPlayerCl.setOnClickListener {
-            //finish() //현재 액티비티 종료
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("songID", song.id)
+            editor.apply()
+
             val intent = Intent(this, SongActivity::class.java)
-            intent.putExtra("title", song.title)
-            intent.putExtra("singer", song.singer)
-            intent.putExtra("second", song.second)
-            intent.putExtra("playTime", song.playTime)
-            intent.putExtra("isPlaying", song.isPlaying)
-            intent.putExtra("music", song.music)
             startActivity(intent)
         }
+
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
             .commit()
@@ -90,26 +87,108 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        //id 받아오기
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId", 0)
+
+        val songDB = SongDatabase.getInstance(this)!!
+
+        //DB에서 해당 id에 해당하는 song을 가져옴
+        song = if (songId==0) {
+            songDB.songDao().getSong(1)
+        } else {
+            songDB.songDao().getSong(songId)
+        }
+
+        Log.d("song ID", song.id.toString())
+        setMiniPlayer(song)
+    }
+
     private fun setMiniPlayer(song: Song){
         binding.mainMiniplayerTitleTv.text = song.title
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainProgressSb.progress = (song.second*100000)/song.playTime
     }
 
-    override fun onStart() {
-        super.onStart()
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
+    private fun inputDummySongs() {
+        val songDB = SongDatabase.getInstance(this)!!
+        val songs = songDB.songDao().getSongs()
 
-        song = if(songJson==null){ //예외 처리
-            Song(title = "라일락", singer = "아이유(IU)", second = 0, playTime = 60, isPlaying = false)
-        } else {
-            gson.fromJson(songJson, Song::class.java)
-        }
+        if (songs.isNotEmpty()) return
 
-        setMiniPlayer(song)
-        Log.d("MainActivity", "Loaded song: ${song.title}, ${song.second}/${song.playTime}")
+        songDB.songDao().insert(
+            Song(
+                title = "Lilac",
+                singer = "아이유 (IU)",
+                second = 0,
+                playTime = 230,
+                isPlaying = false,
+                music = "music_lilac",
+                coverImg = R.drawable.img_album_exp2,
+                isLike = false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                title = "BBoom BBoom",
+                singer = "모모랜드 (MOMOLAND)",
+                second = 0,
+                playTime = 240,
+                isPlaying = false,
+                music = "music_bboom",
+                coverImg = R.drawable.img_great_album_exp,
+                isLike = false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                title = "Butter",
+                singer = "방탄소년단 (BTS)",
+                second = 0,
+                playTime = 180,
+                isPlaying = false,
+                music = "music_butter",
+                coverImg = R.drawable.img_album_exp,
+                isLike = false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                title = "IRIS OUT",
+                singer = "요네즈 켄시 (Kenshi Yonezu)",
+                second = 0,
+                playTime = 155,
+                isPlaying = false,
+                music = "music_irisout",
+                coverImg = R.drawable.img_iris_album_exp,
+                isLike = false
+            )
+        )
+
+        songDB.songDao().insert(
+            Song(
+                title = "Oort Cloud (오르트 구름)",
+                singer = "윤하 (YOUNHA)",
+                second = 0,
+                playTime = 210,
+                isPlaying = false,
+                music = "music_oortcloud",
+                coverImg = R.drawable.img_oort_album_exp,
+                isLike = false
+            )
+        )
+
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString()) //DB에 데이터가 잘 들어갔는지 확인
+
     }
+
+
 
 
 }

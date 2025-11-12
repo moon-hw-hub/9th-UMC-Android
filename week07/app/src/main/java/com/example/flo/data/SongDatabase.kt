@@ -19,8 +19,8 @@ abstract class SongDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         SongDatabase::class.java,
-                        name = "song-database" //다른 데잍터 베이스랑 이름겹치면 꼬임
-                    ).allowMainThreadQueries().build()
+                        name = "song-database" //다른 데이터 베이스랑 이름겹치면 꼬임
+                    ).allowMainThreadQueries().build() //원래는 메인 스레드로 하는 게 아님
                 }
             }
 
