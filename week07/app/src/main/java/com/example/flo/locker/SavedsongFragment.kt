@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.flo.R
 import com.example.flo.databinding.FragmentSavedsongBinding
-import com.example.flo.data.SavedSong
 import com.example.flo.data.Song
 import com.example.flo.data.SongDatabase
 
@@ -55,8 +54,15 @@ class SavedsongFragment : Fragment() {
     private fun initRecyclerView() {
         //리사이클러뷰 어댑터 등록
         val savedsongRVAdapter = SavedsongRVAdapter()
+        savedsongRVAdapter.setMyItemClickListener(object : SavedsongRVAdapter.MyItemClickListener {
+            override fun onRemoveSong(songId: Int) {
+                songDB.songDao().updateIsLikeById(false, songId)
+            }
+        })
+
         binding.savedSongRv.adapter = savedsongRVAdapter
 
         savedsongRVAdapter.addSongs(songDB.songDao().getLikedSongs(true) as ArrayList<Song>)
+
     }
 }
