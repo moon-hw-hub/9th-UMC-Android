@@ -11,7 +11,6 @@ import androidx.room.Update
 interface SongDao {
     @Insert
     fun insert(song: Song)
-
     @Update
     fun update(song: Song)
 
@@ -26,9 +25,11 @@ interface SongDao {
     @Query("SELECT*FROM SongTable WHERE id=:id")
     fun getSong(id: Int): Song
 
+    //좋아요를 했을 때 DB에 곡의 id를 추가하는 함수
     @Query("UPDATE SongTable SET isLike= :isLike WHERE id = :id")
     fun updateIsLikeById(isLike: Boolean, id: Int)
 
+    //DB에서 좋아요 된 곡들을 가져오는 함수
     @Query("SELECT*FROM SongTable WHERE isLike = :isLike")
     fun getLikedSongs(isLike: Boolean): List<Song>
 

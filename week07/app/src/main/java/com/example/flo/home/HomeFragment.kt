@@ -13,11 +13,13 @@ import com.example.flo.databinding.FragmentHomeBinding
 import com.example.flo.data.Album
 import com.example.flo.data.Song
 import com.example.flo.activities.MainActivity
+import com.example.flo.data.SongDatabase
 import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private var albumDatas = ArrayList<Album>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,20 +28,9 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        binding.homeAlbumImgIv1.setOnClickListener {
-//            //앨범 프래그먼트로 데이터 전달
-//            val bundle = Bundle()
-//            bundle.putString("album", binding.lilac.text.toString())
-//            bundle.putString("singer", binding.iu.text.toString())
-//
-//            val albumFragment = AlbumFragment()
-//            albumFragment.arguments = bundle
-//
-//            //화면 전환
-//            (context as MainActivity).supportFragmentManager.beginTransaction()
-//                .replace(R.id.main_frm, albumFragment)
-//                .commitAllowingStateLoss()
-//        }
+        //DB인스턴스를 만든다
+        val songDB = SongDatabase.getInstance(requireContext())!!
+
         // 앨범 데이터 리스트 생성 더미 데이터
         albumDatas.apply {
             add(

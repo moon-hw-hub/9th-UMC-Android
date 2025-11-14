@@ -28,29 +28,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        inputDummySongs()
+        inputDummySongs() //더미 데이터 db에 삽입
 
-        //하단플레이어에 나오는 노래를 Song객체에 저장
-        val song = Song(
-            title = binding.mainMiniplayerTitleTv.text.toString(),
-            singer = binding.mainMiniplayerSingerTv.text.toString(),
-            second = 0, playTime = 60, isPlaying = false, music = "music_lilac"
-        )
+        //하단플레이어에 나오는 노래를 Song객체에 저장 -> roomDB로 대체
+//        val song = Song(
+//            title = binding.mainMiniplayerTitleTv.text.toString(),
+//            singer = binding.mainMiniplayerSingerTv.text.toString(),
+//            second = 0, playTime = 60, isPlaying = false, music = "music_lilac"
+//        )
 
-        //하단의 플레이어를 누르면 송액티비티로 전환. db에 노래의 id를 저장
+        //하단의 플레이어를 누르면 송액티비티로 전환. 이때 sharedPreference에 노래의 id를 저장
         binding.mainPlayerCl.setOnClickListener {
+            //에디터를 만들고
             val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
-            editor.putInt("songID", song.id)
+
+            //송의 id를 넣어준다.
+            editor.putInt("songId", song.id)
+
+            //최종 커밋
             editor.apply()
 
+            //인텐트는 단순 전환 기능만. sharedPrefernece와 DB가 알아서 해주니까.
             val intent = Intent(this, SongActivity::class.java)
             startActivity(intent)
         }
 
-
+        //실행 시 첫 화면 설정 -> 홈프래그먼트
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, HomeFragment())
             .commit()
+
         //BottomNavigationView를 눌렀을 때 Fragment 변경하기
         binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -87,12 +94,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //메인 액티비티가 시작될 때-> sharedprference에서 id값을 가져와서 DB에서 해당 id에 해당하는 song을 가져옴
     override fun onStart() {
         super.onStart()
-        //id 받아오기
+        //sharedprference에서 id값을 가져옴
         val spf = getSharedPreferences("song", MODE_PRIVATE)
         val songId = spf.getInt("songId", 0)
 
+        //DB인스턴스를 만들고
         val songDB = SongDatabase.getInstance(this)!!
 
         //DB에서 해당 id에 해당하는 song을 가져옴
@@ -102,7 +111,9 @@ class MainActivity : AppCompatActivity() {
             songDB.songDao().getSong(songId)
         }
 
-        Log.d("song ID", song.id.toString())
+        Log.d("song ID", song.id.toString()) // 디버깅
+
+        //가져온 송 데이터를 뷰바인딩
         setMiniPlayer(song)
     }
 
@@ -112,12 +123,15 @@ class MainActivity : AppCompatActivity() {
         binding.mainProgressSb.progress = (song.second*100000)/song.playTime
     }
 
+    //DB에 데이터가 없다면 더미 데이터를 넣는 작업
     private fun inputDummySongs() {
         val songDB = SongDatabase.getInstance(this)!!
         val songs = songDB.songDao().getSongs()
 
+        //데이터가 있다면 종료
         if (songs.isNotEmpty()) return
 
+        //데이터가 없을 경우
         songDB.songDao().insert(
             Song(
                 title = "Lilac",
@@ -183,12 +197,10 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        val _songs = songDB.songDao().getSongs()
+        //DB에 데이터가 잘 들어갔는지 로그로 확인
+        val _songs = songDB.songDao().getSongs() //테이블의 모든 송을 가져옴
         Log.d("DB data", _songs.toString()) //DB에 데이터가 잘 들어갔는지 확인
 
     }
-
-
-
 
 }

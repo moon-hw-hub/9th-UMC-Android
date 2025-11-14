@@ -23,16 +23,18 @@ class SongActivity : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer? = null
     private var gson: Gson = Gson()
 
+    // 재생할 "노래 목록(플레이리스트)"을 담기 위한 리스트.
+    // 여러 곡을 담고 이전곡/다음곡으로 이동할 수 있게 하기 위해 존재
     val songs = arrayListOf<Song>()
-    lateinit var songDB: SongDatabase
-    var nowPos = 0
+    lateinit var songDB: SongDatabase // DB인스턴스 선언. DB CRUD작업을 할 때는 필수인 것 같다.
+    var nowPos = 0 //현재 곡을 가리키는 전역변수
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initPlayList()
+        initPlayList() //DB에서 모든 송들을 가져와 songs에 저장
         initSong() //송 데이터 받아와 실행
         initClickListener()
         //setPlayer(songs[nowPos])
@@ -82,46 +84,60 @@ class SongActivity : AppCompatActivity() {
 //        mediaPlayer? = null //미디어 플레이어 해제
     }
 
+    //DB에서 모든 송들을 가져와 songs에 저장
     private fun initPlayList(){
         songDB = SongDatabase.getInstance(this)!!
         songs.addAll(songDB.songDao().getSongs())
     }
 
-    private fun initClickListener() {
+    private fun initClickListener()= with(binding){
         //우측 상단 버튼 누르면 액티비티 종료
-        binding.songDownIb.setOnClickListener{
+        songDownIb.setOnClickListener{
             finish()
         }
         //재생, 일시정지
-        binding.songMiniplayerIv.setOnClickListener {
+        songMiniplayerIv.setOnClickListener {
             setPlayerStatus(true)
         }
-        binding.songPauseIv.setOnClickListener {
+        songPauseIv.setOnClickListener {
             setPlayerStatus(false)
         }
 
         //이전곡/다음곡
-        binding.songPreviousIv.setOnClickListener {
+        songPreviousIv.setOnClickListener {
             moveSong(-1)
         }
-        binding.songNextIv.setOnClickListener {
+        songNextIv.setOnClickListener {
             moveSong(+1)
         }
 
-        binding.songLikeIv.setOnClickListener {
+        songLikeIv.setOnClickListener {
             setLike(songs[nowPos].isLike)
         }
     }
 
     //SharedPreference에서 id값을 받아와서 songid를 통해서 songs와 비교해서 index값을 구하는 함수
     private fun initSong() {
+        //sharedpreference에서 id를 받아옴
         val spf = getSharedPreferences("song", MODE_PRIVATE)
         val songId = spf.getInt("songId", 0)
 
+        //송의 id를 nowPos에 저장
         nowPos = getPlayingSongPosition(songId)
         Log.d("now Song ID", songs[nowPos].id.toString())
-        startTimer()
+        startTimer() //타이머 시작
+        //뷰 렌더링, 미디어플레이어 시작
         setPlayer(songs[nowPos])
+    }
+
+    //
+    private fun getPlayingSongPosition(songId: Int): Int {
+        for(i in 0 until songs.size) {
+            if(songs[i].id==songId) {
+                return i
+            }
+        }
+        return 0
     }
 
     //좋아요 버튼 이벤트
@@ -151,19 +167,10 @@ class SongActivity : AppCompatActivity() {
         mediaPlayer?.release()
         mediaPlayer = null
 
-        setPlayer(songs[nowPos])
+        setPlayer(songs[nowPos]) //뷰렌더링, 노래 시작
         startTimer() // ✅ 새 MediaPlayer로 세팅된 후 타이머 시작
         Log.d("현재 곡", songs[nowPos].music)
 
-    }
-
-    private fun getPlayingSongPosition(songId: Int): Int {
-        for(i in 0 until songs.size) {
-            if(songs[i].id==songId) {
-                return i
-            }
-        }
-        return 0
     }
 
     //송 데이터를 뷰에 렌더링하는 함수
