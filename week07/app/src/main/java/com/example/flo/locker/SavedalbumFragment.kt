@@ -14,6 +14,7 @@ import com.google.gson.Gson
 
 class SavedalbumFragment : Fragment() {
 
+    //갱신
     lateinit var binding : FragmentSavedalbumBinding
     private var albumDatas = ArrayList<Album>()
 
