@@ -9,42 +9,41 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.R
 import com.example.flo.databinding.FragmentSongBinding
 import com.example.flo.data.Album
+import com.example.flo.data.Song
+import com.example.flo.data.SongDatabase
 import com.google.gson.Gson
 
 class SongFragment : Fragment() {
-    lateinit var binding : FragmentSongBinding
-//    private var songDatas = ArrayList<Song>()
+    lateinit var binding: FragmentSongBinding
+    private var songDatas = ArrayList<Song>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSongBinding.inflate(inflater, container, false)
 
-        //수록곡 목록 표시를 위해 앨범 정보를 겟또
-        val albumJson = arguments?.getString("album")
-        val album = Gson().fromJson(albumJson, Album::class.java)
+        // 전달받은 albumId 꺼내기
+        val albumId = arguments?.getInt("albumId", 0) ?: 0
 
-        //리사이클러뷰 어댑터 등록
-        val songRVAdapter = SongRVAdapter(album.songs ?: arrayListOf())
+        // DB에서 수록곡 조회
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        songDatas = ArrayList(songDB.songDao().getSongsInAlbum(albumId))
+
+        // 리사이클러뷰 어댑터 등록
+        val songRVAdapter = SongRVAdapter(songDatas)
         binding.albumTrackRv.adapter = songRVAdapter
         binding.albumTrackRv.layoutManager = LinearLayoutManager(context)
 
-        //내 취향 믹스 미션
+        // 믹스 토글 버튼
         var isON = false
-
         binding.songMixoffTg.setOnClickListener {
-            if (!isON) {
-                binding.songMixoffTg.setImageResource(R.drawable.btn_toggle_on)
-                isON = true
-            } else {
-                binding.songMixoffTg.setImageResource(R.drawable.btn_toggle_off)
-                isON = false
-            }
-
+            isON = !isON
+            binding.songMixoffTg.setImageResource(
+                if (isON) R.drawable.btn_toggle_on else R.drawable.btn_toggle_off
+            )
         }
-
         return binding.root
     }
 }

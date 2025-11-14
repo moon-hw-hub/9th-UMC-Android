@@ -24,44 +24,44 @@ class SavedalbumFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSavedalbumBinding.inflate(inflater, container, false)
-        albumDatas.apply {
-            add(
-                Album(
-                    title = "Butter",
-                    singer = "방탄소년단(BTS)",
-                    coverImage = R.drawable.img_album_exp,
-                    information = "2021.03.25|정규|댄스 팝"
-                )
-            )
-            add(
-                Album(
-                    title = "Great!",
-                    singer = "모모랜드(MOMOLAND)",
-                    coverImage = R.drawable.img_great_album_exp,
-                    information = "2021.03.25|정규|댄스 팝"
-                )
-            )
-        }
-
-        val savedAlbumRVAdapter = SavedAlbumRVAdapter(albumDatas)
-        binding.savedAlbumRv.adapter = savedAlbumRVAdapter
-
-        binding.savedAlbumRv.layoutManager = LinearLayoutManager(
-            context, LinearLayoutManager.VERTICAL, false
-        )
-
-        //어댑터객체에 클릭 리스너 세팅
-        savedAlbumRVAdapter.setMyItemClickListener(object:
-            SavedAlbumRVAdapter.MyItemClickListener {
-            override fun onRemoveAlbum(position: Int) {
-                savedAlbumRVAdapter.removeAlbum(position)
-            }
-            }
-        )
-
-
-        val songJson = arguments?.getString("song")
-        val song = Gson().fromJson(songJson, Song::class.java)
+//        albumDatas.apply {
+//            add(
+//                Album(
+//                    title = "Butter",
+//                    singer = "방탄소년단(BTS)",
+//                    coverImage = R.drawable.img_album_exp,
+//                    information = "2021.03.25|정규|댄스 팝"
+//                )
+//            )
+//            add(
+//                Album(
+//                    title = "Great!",
+//                    singer = "모모랜드(MOMOLAND)",
+//                    coverImage = R.drawable.img_great_album_exp,
+//                    information = "2021.03.25|정규|댄스 팝"
+//                )
+//            )
+//        }
+//
+//        val savedAlbumRVAdapter = SavedAlbumRVAdapter(albumDatas)
+//        binding.savedAlbumRv.adapter = savedAlbumRVAdapter
+//
+//        binding.savedAlbumRv.layoutManager = LinearLayoutManager(
+//            context, LinearLayoutManager.VERTICAL, false
+//        )
+//
+//        //어댑터객체에 클릭 리스너 세팅
+//        savedAlbumRVAdapter.setMyItemClickListener(object:
+//            SavedAlbumRVAdapter.MyItemClickListener {
+//            override fun onRemoveAlbum(position: Int) {
+//                savedAlbumRVAdapter.removeAlbum(position)
+//            }
+//            }
+//        )
+//
+//
+//        val songJson = arguments?.getString("song")
+//        val song = Gson().fromJson(songJson, Song::class.java)
 
         return binding.root
     }

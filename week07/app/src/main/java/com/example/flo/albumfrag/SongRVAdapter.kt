@@ -23,7 +23,6 @@ class SongRVAdapter(private var songList: ArrayList<Song>): RecyclerView.Adapter
         position: Int
     ) {
         holder.bind(songList[position])
-
     }
 
     override fun getItemCount():Int = songList.size

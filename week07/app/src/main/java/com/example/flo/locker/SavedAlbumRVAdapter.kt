@@ -48,8 +48,8 @@ class SavedAlbumRVAdapter(private var albumList: ArrayList<Album>):
         fun bind(album: Album) {
             binding.albumTitleTv.text = album.title
             binding.albumSingerNameTv.text = album.singer
-            binding.itemAlbumCoverImgIv.setImageResource(album.coverImage!!)
-            binding.albumInformationTv.text = album.information
+            binding.itemAlbumCoverImgIv.setImageResource(album.coverImg!!)
+            //binding.albumInformationTv.text = album.information
         }
 
     }

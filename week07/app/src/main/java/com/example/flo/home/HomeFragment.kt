@@ -18,8 +18,7 @@ import com.google.gson.Gson
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    private var albumDatas = ArrayList<Album>()
-
+    private var albumDatas = ArrayList<Album>() // 오늘의 앨범에 나올 앨범들을 위함
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,68 +26,9 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        inputDummyAlbums() //DB에 앨범데이터 삽입(초기설정용)
 
-        //DB인스턴스를 만든다
-        val songDB = SongDatabase.getInstance(requireContext())!!
-
-        // 앨범 데이터 리스트 생성 더미 데이터
-        albumDatas.apply {
-            add(
-                Album(
-                    title = "Butter",
-                    singer = "방탄소년단 (BTS)",
-                    coverImage = R.drawable.img_album_exp,
-                    songs = arrayListOf(
-                        Song("01", "Butter", "방탄소년단 (BTS)"),
-                        Song("02", "Permission to Dance", "방탄소년단 (BTS)"),
-                        Song("03", "Butter (Instrumental)", "방탄소년단 (BTS)"),
-                        Song("04", "Permission to Dance (Instrumental)", "방탄소년단 (BTS)")
-                    )
-                )
-            )
-            add(
-                Album(
-                    title = "Lilac",
-                    singer = "아이유 (IU)",
-                    coverImage = R.drawable.img_album_exp2,
-                    songs = arrayListOf(
-                        Song("01", "라일락", "아이유 (IU)"),
-                        Song("02", "Flu", "아이유 (IU)"),
-                        Song("03", "Coin", "아이유 (IU)"),
-                        Song("04", "봄 안녕 봄", "아이유 (IU)"),
-                        Song("05", "Celebrity", "아이유 (IU)"),
-                        Song("06", "돌림노래", "아이유 (IU)"),
-                        Song("07", "빈 컵", "아이유 (IU)"),
-                        Song("08", "아이와 나의 바다", "아이유 (IU)"),
-                        Song("09", "어푸 (Ah puh )", "아이유 (IU)"),
-                        Song("10", "에필로그", "아이유 (IU)")
-                    )
-                )
-            )
-            add(
-                Album(
-                    title = "Temp",
-                    singer = "김시선 (UMC)",
-                    coverImage = R.drawable.img_potcast_exp
-                )
-            )
-            add(
-                Album(
-                    title = "Classic",
-                    singer = "베토벤 (Beethoven)",
-                    coverImage = R.drawable.img_first_album_default,
-                    songs = arrayListOf(
-                        Song("01", "월광 소나타", "베토벤 (Beethoven)"),
-                        Song("02", "비창 소나타", "베토벤 (Beethoven)"),
-                        Song("03", "운명 교향곡", "베토벤 (Beethoven)"),
-                        Song("04", "영웅 교향곡", "베토벤 (Beethoven)"),
-                        Song("05", "환희의 송가", "베토벤 (Beethoven)"),
-                        Song("06", "황제 협주곡", "베토벤 (Beethoven)")
-
-                    )
-                )
-            )
-        }
+        albumDatas = getTodayAlbumDatas() //DB에서 앨범 리스트 가져오기
 
         //리사이클러뷰 어댑터 등록 (앨범 나열)
         val albumRVAdapter = AlbumRVAdapter(albumDatas)
@@ -103,7 +43,7 @@ class HomeFragment : Fragment() {
         //등록한 리사이클러뷰 어댑터 객체에 클릭리스너 세팅
         albumRVAdapter.setMyItemClickListener(object : AlbumRVAdapter.MyItemClickListener {
             override fun onItemClick(album: Album) {
-                changeAlbumFragment(album)
+                changeAlbumFragment(album) //앨범프래그먼트로 전환 시 클릭한 앨범의 id 전달
             }
 
 //            override fun onRemoveAlbum(position: Int) {
@@ -127,15 +67,36 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private fun inputDummyAlbums() {
+        //DB인스턴스를 만든다
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        val albums = songDB.albumDao().getAlbums()
+
+        //앨범 데이터가 있다면 종료
+        if (albums.isNotEmpty()) return
+
+        //데이터가 없을 경우 -> 앨범 데이터 삽입
+        songDB.albumDao().apply {
+            insert(Album(1, "LILAC", "아이유 (IU)", false, R.drawable.img_album_exp2))
+            insert(Album(2, "GREAT!", "모모랜드 (MOMOLAND)", false, R.drawable.img_great_album_exp))
+            insert(Album(3, "Butter", "방탄소년단 (BTS)", false, R.drawable.img_album_exp))
+            insert(Album(4, "LOST CORNER", "요네즈 켄시 (Kenshi Yonezu)", false, R.drawable.img_iris_album_exp))
+            insert(Album(5, "END THEORY", "윤하 (YOUNHA)", false, R.drawable.img_oort_album_exp))
+        }
+    }
+    private fun getTodayAlbumDatas(): ArrayList<Album> {
+        val songDB = SongDatabase.getInstance(requireContext())!!
+        albumDatas = ArrayList(songDB.albumDao().getAlbums()) // DB에서 앨범 리스트 가져오기
+        return albumDatas
+    }
+
+    //앨범프래그먼트로 전환 시 클릭한 앨범의 id 전달
     private fun changeAlbumFragment(album: Album) {
+        val bundle = Bundle().apply {
+            putInt("albumId", album.id) // ID만 전달
+        }
         (context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, AlbumFragment().apply {
-                arguments = Bundle().apply {
-                    val gson = Gson()
-                    val albumJson = gson.toJson(album) //앨범객체를 Json으로 변환
-                    putString("album", albumJson)
-                }
-            })
+            .replace(R.id.main_frm, AlbumFragment().apply { arguments = bundle })
             .commitAllowingStateLoss()
     }
 

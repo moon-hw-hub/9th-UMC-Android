@@ -55,7 +55,7 @@ class AlbumRVAdapter(private var albumList: ArrayList<Album>): RecyclerView.Adap
         fun bind(album: Album) {
             binding.itemAlbumTitleTv.text = album.title
             binding.itemAlbumSingerTv.text = album.singer
-            binding.itemAlbumCoverImgIv.setImageResource(album.coverImage!!)
+            binding.itemAlbumCoverImgIv.setImageResource(album.coverImg!!)
         }
 
     }

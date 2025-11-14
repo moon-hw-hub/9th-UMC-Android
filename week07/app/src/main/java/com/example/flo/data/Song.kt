@@ -16,7 +16,7 @@ data class Song(
     var music: String = "",
     var coverImg: Int? = null,
     var isLike: Boolean = false,
-    //var albumIdx: Int? = 0
+    var albumIdx: Int? = 0
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

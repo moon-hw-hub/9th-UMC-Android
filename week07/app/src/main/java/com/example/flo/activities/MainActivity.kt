@@ -141,7 +141,8 @@ class MainActivity : AppCompatActivity() {
                 isPlaying = false,
                 music = "music_lilac",
                 coverImg = R.drawable.img_album_exp2,
-                isLike = false
+                isLike = false,
+                albumIdx = 1
             )
         )
 
@@ -154,7 +155,8 @@ class MainActivity : AppCompatActivity() {
                 isPlaying = false,
                 music = "music_bboom",
                 coverImg = R.drawable.img_great_album_exp,
-                isLike = false
+                isLike = false,
+                albumIdx = 2
             )
         )
 
@@ -167,7 +169,8 @@ class MainActivity : AppCompatActivity() {
                 isPlaying = false,
                 music = "music_butter",
                 coverImg = R.drawable.img_album_exp,
-                isLike = false
+                isLike = false,
+                albumIdx = 3
             )
         )
 
@@ -180,7 +183,8 @@ class MainActivity : AppCompatActivity() {
                 isPlaying = false,
                 music = "music_irisout",
                 coverImg = R.drawable.img_iris_album_exp,
-                isLike = false
+                isLike = false,
+                albumIdx = 4
             )
         )
 
@@ -193,7 +197,8 @@ class MainActivity : AppCompatActivity() {
                 isPlaying = false,
                 music = "music_oortcloud",
                 coverImg = R.drawable.img_oort_album_exp,
-                isLike = false
+                isLike = false,
+                albumIdx = 5
             )
         )
 
