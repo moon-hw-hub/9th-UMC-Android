@@ -34,7 +34,7 @@ class LockerFragment : Fragment() {
 
         }.attach()
 
-        //로그인액티비티로 화면전환
+        //로그인 액티비티로 화면전환
         binding.login.setOnClickListener {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
