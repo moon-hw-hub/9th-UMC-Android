@@ -1,15 +1,20 @@
 package com.example.flo.locker
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import com.example.flo.activities.LoginActivity
+import com.example.flo.activities.MainActivity
 import com.example.flo.databinding.FragmentLockerBinding
 import com.example.flo.data.Song
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlin.math.log
 
 class LockerFragment : Fragment() {
     lateinit var binding: FragmentLockerBinding
@@ -39,6 +44,43 @@ class LockerFragment : Fragment() {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        initView()
+    }
+
+    //SharedPreferences에서 JWT를 가져오는 메서드
+    private fun getJwt(): Int {
+        val spf = activity?.getSharedPreferences("auth", MODE_PRIVATE) //activity? : 프래그먼트에서의 작성방법
+        return spf!!.getInt("jwt", 0)
+    }
+
+    //로그인으로 할지 로그아웃으로 할지 뷰를 결정, 클릭리스너도 담당
+    private fun initView() {
+        val jwt: Int = getJwt()
+        if (jwt == 0) {
+            binding.login.text = "로그인"
+            binding.login.setOnClickListener {
+                startActivity(Intent(activity, LoginActivity::class.java))
+            }
+        }
+        else {
+            binding.login.text = "로그아웃"
+            binding.login.setOnClickListener {
+                //로그아웃 진행
+                logout()
+                startActivity(Intent(activity, MainActivity::class.java))
+            }
+        }
+    }
+
+    private fun logout() {
+        val spf = activity?.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        val editor = spf!!.edit()
+        editor.remove("jwt")
+        editor.apply()
     }
 
     private fun setInit(song: Song) {

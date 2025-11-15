@@ -2,10 +2,12 @@ package com.example.flo.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.example.flo.data.SongDatabase
 import com.example.flo.databinding.ActivityLoginBinding
-
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -21,6 +23,48 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
+        binding.loginSignInBtn.setOnClickListener {
+            login()
+        }
+    }
+
+    //로그인 처리 함수
+    private fun login() {
+        //예외 처리
+        if (binding.loginIdEt.text.toString().isEmpty() || binding.loginDirectInputEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "이메일을 입력해주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (binding.loginPasswordEt.text.toString().isEmpty()) {
+            Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val email : String = binding.loginIdEt.text.toString() + "@" + binding.loginDirectInputEt.text.toString()
+        val pwd: String = binding.loginPasswordEt.text.toString()
+
+        val songDB = SongDatabase.getInstance(this)!!
+        val user = songDB.userDao().getUser(email, pwd)
+
+        //user가 null이 아니면 다음을 실행하라
+        user?.let {
+            Log.d("LOGIN_ACT/GET_USER", "userId : ${user.id}, $user")
+            saveJwt(user.id)
+            startMainActivity()
+        }
+        Toast.makeText(this, "회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveJwt(jwt:Int) {
+        val spf = getSharedPreferences("auth", MODE_PRIVATE)
+        val editor = spf.edit()
+
+        editor.putInt("jwt", jwt)
+        editor.apply()
+    }
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }
