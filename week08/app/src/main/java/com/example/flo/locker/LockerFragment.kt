@@ -1,10 +1,12 @@
 package com.example.flo.locker
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.flo.activities.LoginActivity
 import com.example.flo.databinding.FragmentLockerBinding
 import com.example.flo.data.Song
 import com.google.android.material.tabs.TabLayoutMediator
@@ -31,6 +33,11 @@ class LockerFragment : Fragment() {
             tap.text = information[position]
 
         }.attach()
+
+        //로그인액티비티로 화면전환
+        binding.login.setOnClickListener {
+            startActivity(Intent(activity, LoginActivity::class.java))
+        }
         return binding.root
     }
 

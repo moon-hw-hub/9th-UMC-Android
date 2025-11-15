@@ -34,7 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--액티비티를 만들면 꼭 추가해줘야함        -->
         <activity android:name=".activities.SongActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.SignUpActivity" />
+
     </application>
 
 </manifest>
